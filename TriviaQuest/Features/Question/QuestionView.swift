@@ -34,7 +34,6 @@ struct QuestionView: View {
                             }
                             viewModel.question[0].incorrectAnswerChosen = viewModel.answers[a].number
                             viewModel.saveData()
-//                            answerNumberChosen = Int(viewModel.answers[a].number)
                         }) {
                             HStack {
                                 Text(viewModel.answers[a].text ?? "no answer text").foregroundColor(.white)

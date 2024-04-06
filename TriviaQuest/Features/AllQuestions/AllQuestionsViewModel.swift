@@ -13,7 +13,7 @@ class AllQuestionsViewModel: ObservableObject {
     let context = PersistenceController.shared.managedObjectContext
     @Published var questions: [Question] = []
 
-    func load15Questions(networkManager: NetworkManagerModule) {
+    func load15Questions(networkManager: NetworkManagerModule) async {
         Task.init {
             self.getLoadedQuestions()
             if questions.isEmpty {
@@ -89,18 +89,17 @@ class AllQuestionsViewModel: ObservableObject {
     }
     
     func getLoadedQuestions() {
-        
-        if questions.isEmpty {
             
+            questions = []
             let request: NSFetchRequest<Question> = Question.fetchRequest()
             let sortDescriptor = NSSortDescriptor(key: "number", ascending: true)
             request.sortDescriptors = [sortDescriptor]
             do {
                 questions = try context.fetch(request)
+                print("questions loaded: \(questions.count)")
             } catch {
                 print("error loading issues from CD: \(error)")
             }
-        }
     }
 
 }

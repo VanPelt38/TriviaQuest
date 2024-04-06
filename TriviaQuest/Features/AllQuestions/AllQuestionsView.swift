@@ -12,34 +12,37 @@ struct AllQuestionsView: View {
     
     @StateObject private var viewModel = AllQuestionsViewModel()
     @Environment(\.managedObjectContext) private var viewContext
-    
-    //    @FetchRequest(
-    //        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
-    //        animation: .default)
-    //    private var items: FetchedResults<Item>
+    @State private var searchText = ""
+    var filteredQuestions: [Question] {
+        viewModel.questions.filter { question in
+            if searchText == "" {
+                return question.text != ""
+            } else {
+                return question.text?.lowercased().contains(searchText.lowercased()) ?? false
+            }
+        }
+
+    }
     
     var body: some View {
         NavigationView {
+            VStack {
             List {
-                ForEach(0..<viewModel.questions.count, id: \.self) { question in
-
+                ForEach(0..<filteredQuestions.count, id: \.self) { question in
+                    
                     NavigationLink(destination: QuestionView(number: Int(viewModel.questions[question].number) )) {
-                        QuestionRow(text: viewModel.questions[question].text ?? "no question", category: "Category: \(viewModel.questions[question].category ?? "no category")", difficulty: "Difficulty: \( viewModel.questions[question].difficulty ?? "no difficulty")")
+                        QuestionRow(text: viewModel.questions[question].text ?? "no question", category: "Category: \(viewModel.questions[question].category ?? "no category")", difficulty: "Difficulty: \( viewModel.questions[question].difficulty ?? "no difficulty")", answeredCorrectly: viewModel.questions[question].answeredCorrect, answeredIncorrectly: viewModel.questions[question].answeredWrong)
                     }
                 }
             }.listRowInsets(EdgeInsets())
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
+                .task {
+                    Task.init {
+                        await viewModel.load15Questions(networkManager: NetworkManager(session: URLSession.shared))
+                    }
                 }
-                ToolbarItem {
-                    //                    Button(action: addItem) {
-                    //                        Label("Add Item", systemImage: "plus")
-                    //                    }
-                }
-            }.task {
-                viewModel.load15Questions(networkManager: NetworkManager(session: URLSession.shared))
-            }
+        }
+            .searchable(text: $searchText)
+            .navigationTitle("Today's Questions")
         }
     }
 }
@@ -49,6 +52,8 @@ struct QuestionRow: View {
     var text: String
     var category: String
     var difficulty: String
+    var answeredCorrectly: Bool
+    var answeredIncorrectly: Bool
     var body: some View {
         VStack {
             Text(text)
@@ -58,36 +63,21 @@ struct QuestionRow: View {
             HStack {
                 Text(category).foregroundColor(.blue)
                 Text(difficulty).foregroundColor(.red)
-            }
+                if answeredCorrectly {
+                    Image("green-tick")
+                        .resizable()
+                        .frame(width: 20, height: 20)
+                }
+                if answeredIncorrectly {
+                    Image("red-cross")
+                        .resizable()
+                        .frame(width: 20, height: 20)
+                }
+                }
         }
         .padding(.vertical, 5)
     }
 }
-
-//    private func addItem() {
-//        withAnimation {
-//            let newItem = Item(context: viewContext)
-//            newItem.timestamp = Date()
-//
-//            do {
-//                try viewContext.save()
-//            } catch {
-//                // Replace this implementation with code to handle the error appropriately.
-//                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-//                let nsError = error as NSError
-//                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-//            }
-//        }
-//    }
-//
-//}
-//
-//private let itemFormatter: DateFormatter = {
-//    let formatter = DateFormatter()
-//    formatter.dateStyle = .short
-//    formatter.timeStyle = .medium
-//    return formatter
-//}()
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
