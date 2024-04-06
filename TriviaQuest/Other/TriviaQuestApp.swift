@@ -13,7 +13,7 @@ struct TriviaQuestApp: App {
 
     var body: some Scene {
         WindowGroup {
-            AllQuestionsView()
+            WelcomeView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
