@@ -8,13 +8,23 @@
 import SwiftUI
 
 struct QuestionView: View {
+    
+    @StateObject private var viewModel = QuestionViewModel()
+    @State var number: Int
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            if !viewModel.question.isEmpty {
+                Text(viewModel.question[0].text ?? "no question")
+            }
+        }.task {
+            viewModel.getQuestion(number)
+        }
     }
 }
 
-struct QuestionView_Previews: PreviewProvider {
-    static var previews: some View {
-        QuestionView()
-    }
-}
+//struct QuestionView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        QuestionView(number: )
+//    }
+//}

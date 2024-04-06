@@ -23,7 +23,7 @@ struct AllQuestionsView: View {
             List {
                 ForEach(0..<viewModel.questions.count, id: \.self) { question in
 
-                    NavigationLink(destination: QuestionView()) {
+                    NavigationLink(destination: QuestionView(number: Int(viewModel.questions[question].number) )) {
                         QuestionRow(text: viewModel.questions[question].text ?? "no question", category: "Category: \(viewModel.questions[question].category ?? "no category")", difficulty: "Difficulty: \( viewModel.questions[question].difficulty ?? "no difficulty")")
                     }
                 }
