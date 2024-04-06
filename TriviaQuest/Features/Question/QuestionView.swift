@@ -16,6 +16,28 @@ struct QuestionView: View {
         VStack {
             if !viewModel.question.isEmpty {
                 Text(viewModel.question[0].text ?? "no question")
+                Text(viewModel.question[0].category ?? "no category")
+                Text(viewModel.question[0].difficulty ?? "no difficulty")
+                if !viewModel.answers.isEmpty {
+                    ForEach (0..<viewModel.answers.count, id: \.self) { a in
+                        Button(action: {
+                            print("hello")
+                        }) {
+                            Text(viewModel.answers[a].text ?? "no answer text")
+                        }
+                    }
+                } else {
+                    Button(action: {
+                        print("hello")
+                    }) {
+                        Text("true")
+                    }
+                    Button(action: {
+                        print("hello")
+                    }) {
+                        Text("false")
+                    }
+                }
             }
         }.task {
             viewModel.getQuestion(number)
