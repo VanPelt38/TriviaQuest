@@ -33,14 +33,17 @@ struct AllQuestionsView: View {
                     NavigationLink(destination: QuestionView(number: Int(viewModel.questions[question].number) )) {
                         QuestionRow(text: viewModel.questions[question].text ?? "no question", category: "Category: \(viewModel.questions[question].category ?? "no category")", difficulty: "Difficulty: \( viewModel.questions[question].difficulty ?? "no difficulty")", answeredCorrectly: viewModel.questions[question].answeredCorrect, answeredIncorrectly: viewModel.questions[question].answeredWrong)
                     }
-                }
-            }.listRowInsets(EdgeInsets())
+                }.listRowBackground(Color.clear)
+            }.onAppear {
+                        UITableView.appearance().backgroundColor = .clear
+                    }
+            .listRowInsets(EdgeInsets())
                 .task {
                     Task.init {
                         await viewModel.load15Questions(networkManager: NetworkManager(session: URLSession.shared))
                     }
                 }
-        }
+            }
             .searchable(text: $searchText)
             .navigationTitle("Today's Questions")
         }
@@ -60,6 +63,7 @@ struct QuestionRow: View {
                 .foregroundColor(.black)
                 .background(.white)
                 .cornerRadius(20)
+                
             HStack {
                 Text(category).foregroundColor(.blue)
                 Text(difficulty).foregroundColor(.red)

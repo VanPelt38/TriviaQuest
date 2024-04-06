@@ -15,6 +15,8 @@ struct QuestionView: View {
     @State private var answerNumberChosen: Int?
     
     var body: some View {
+        ZStack {
+           
         VStack {
             if !viewModel.question.isEmpty {
                 Text(viewModel.question[0].text ?? "no question")
@@ -36,7 +38,7 @@ struct QuestionView: View {
                             viewModel.saveData()
                         }) {
                             HStack {
-                                Text(viewModel.answers[a].text ?? "no answer text").foregroundColor(.white)
+                                Text(viewModel.answers[a].text ?? "no answer text").foregroundColor(.white).padding(EdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10))
                                 if answerChosen != nil {
                                     if viewModel.answers[a].correct {
                                         Image("green-tick")
@@ -51,9 +53,9 @@ struct QuestionView: View {
                             }
                         }
                         .background(
-                                RoundedRectangle(cornerRadius: 10)
-                                    .fill(setAnswerColour(answerNo: a))
-                                )
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(setAnswerColour(answerNo: a))
+                        )
                     }
                 } else if !viewModel.answers.isEmpty {
                     Button(action: {
@@ -73,7 +75,7 @@ struct QuestionView: View {
                         }
                     }) {
                         HStack{
-                            Text("true").foregroundColor(.white)
+                            Text("true").foregroundColor(.white).padding(EdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10))
                             if let a = answerChosen {
                                 if a {
                                     Image("green-tick")
@@ -89,7 +91,7 @@ struct QuestionView: View {
                     }.background(
                         RoundedRectangle(cornerRadius: 10)
                             .fill(setAnswerColour(answerNo: 0))
-                        )
+                    )
                     Button(action: {
                         for a in viewModel.answers {
                             if a.number == 2 {
@@ -107,7 +109,7 @@ struct QuestionView: View {
                         }
                     }) {
                         HStack{
-                            Text("false").foregroundColor(.white)
+                            Text("false").foregroundColor(.white).padding(EdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10))
                             if let a = answerChosen {
                                 if !a {
                                     Image("green-tick")
@@ -123,21 +125,31 @@ struct QuestionView: View {
                     }.background(
                         RoundedRectangle(cornerRadius: 10)
                             .fill(setAnswerColour(answerNo: 1))
-                        )
+                    )
                 }
                 if let answer = answerChosen {
                     setAnswerMessage(answer)
                 }
             }
-        }.task {
-            viewModel.getQuestion(number)
-            if viewModel.question[0].answeredCorrect {
-                answerChosen = true
-            } else if viewModel.question[0].answeredWrong {
-                answerChosen = false
+        }.background(
+            RoundedRectangle(cornerRadius: 10).fill(.white)
+        )
+        .task {
+                viewModel.getQuestion(number)
+                if viewModel.question[0].answeredCorrect {
+                    answerChosen = true
+                } else if viewModel.question[0].answeredWrong {
+                    answerChosen = false
+                }
             }
-        }
-        .disabled(answerChosen != nil)
+            .disabled(answerChosen != nil)
+    }.frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(
+                Image("subtle-prism")
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .edgesIgnoringSafeArea(.all)
+            )
     }
     
     func setAnswerMessage(_ answer: Bool) -> Text {
