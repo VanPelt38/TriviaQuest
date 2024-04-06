@@ -20,7 +20,7 @@ struct QuestionView: View {
                 Text(viewModel.question[0].text ?? "no question")
                 Text(viewModel.question[0].category ?? "no category")
                 Text(viewModel.question[0].difficulty ?? "no difficulty")
-                if !viewModel.answers.isEmpty {
+                if !viewModel.answers.isEmpty && viewModel.answers.count > 2 {
                     ForEach (0..<viewModel.answers.count, id: \.self) { a in
                         Button(action: {
                             answerChosen = viewModel.answers[a].correct ? true : false
@@ -46,17 +46,57 @@ struct QuestionView: View {
                                     .fill(setAnswerColour(answerNo: a))
                                 )
                     }
-                } else {
+                } else if !viewModel.answers.isEmpty {
                     Button(action: {
-                        print("hello")
+                        for a in viewModel.answers {
+                            if a.number == 1 {
+                                answerChosen = a.correct ? true : false
+                            }
+                        }
                     }) {
-                        Text("true")
-                    }
+                        HStack{
+                            Text("true").foregroundColor(.white)
+                            if let a = answerChosen {
+                                if a {
+                                    Image("green-tick")
+                                        .resizable()
+                                        .frame(width: 20, height: 20)
+                                } else {
+                                    Image("red-cross")
+                                        .resizable()
+                                        .frame(width: 20, height: 20)
+                                }
+                            }
+                        }
+                    }.background(
+                        RoundedRectangle(cornerRadius: 10)
+                            .fill(setAnswerColour(answerNo: 0))
+                        )
                     Button(action: {
-                        print("hello")
+                        for a in viewModel.answers {
+                            if a.number == 2 {
+                                answerChosen = a.correct ? true : false
+                            }
+                        }
                     }) {
-                        Text("false")
-                    }
+                        HStack{
+                            Text("false").foregroundColor(.white)
+                            if let a = answerChosen {
+                                if !a {
+                                    Image("green-tick")
+                                        .resizable()
+                                        .frame(width: 20, height: 20)
+                                } else {
+                                    Image("red-cross")
+                                        .resizable()
+                                        .frame(width: 20, height: 20)
+                                }
+                            }
+                        }
+                    }.background(
+                        RoundedRectangle(cornerRadius: 10)
+                            .fill(setAnswerColour(answerNo: 1))
+                        )
                 }
                 if let answer = answerChosen {
                     setAnswerMessage(answer)

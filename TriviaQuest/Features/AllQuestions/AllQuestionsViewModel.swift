@@ -59,6 +59,16 @@ class AllQuestionsViewModel: ObservableObject {
                             incorrectAnswerNo += 1
                             incorrectAnswer.text = answer
                         }
+                    } else {
+                        
+                        let rightAnswer = Answer(context: context)
+                        rightAnswer.answer2Question = newQuestion
+                        rightAnswer.correct = question.correct_answer == "True" ? true : false
+                        rightAnswer.number = 1
+                        let wrongAnswer = Answer(context: context)
+                        wrongAnswer.answer2Question = newQuestion
+                        wrongAnswer.correct = !rightAnswer.correct
+                        wrongAnswer.number = 2
                     }
                 }
                 saveData(coreDataService: PersistenceController.shared)
