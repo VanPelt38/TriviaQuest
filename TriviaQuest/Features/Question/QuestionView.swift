@@ -24,7 +24,17 @@ struct QuestionView: View {
                     ForEach (0..<viewModel.answers.count, id: \.self) { a in
                         Button(action: {
                             answerChosen = viewModel.answers[a].correct ? true : false
-                            answerNumberChosen = Int(viewModel.answers[a].number)
+                            switch answerChosen {
+                            case true:
+                                viewModel.question[0].answeredCorrect = true
+                            case false:
+                                viewModel.question[0].answeredWrong = true
+                            default:
+                                viewModel.question[0].answeredCorrect = true
+                            }
+                            viewModel.question[0].incorrectAnswerChosen = viewModel.answers[a].number
+                            viewModel.saveData()
+//                            answerNumberChosen = Int(viewModel.answers[a].number)
                         }) {
                             HStack {
                                 Text(viewModel.answers[a].text ?? "no answer text").foregroundColor(.white)
@@ -33,7 +43,7 @@ struct QuestionView: View {
                                         Image("green-tick")
                                             .resizable()
                                             .frame(width: 20, height: 20)
-                                    } else if viewModel.answers[a].number == answerNumberChosen! {
+                                    } else if viewModel.answers[a].number == viewModel.question[0].incorrectAnswerChosen {
                                         Image("red-cross")
                                             .resizable()
                                             .frame(width: 20, height: 20)
@@ -51,6 +61,15 @@ struct QuestionView: View {
                         for a in viewModel.answers {
                             if a.number == 1 {
                                 answerChosen = a.correct ? true : false
+                                switch answerChosen {
+                                case true:
+                                    viewModel.question[0].answeredCorrect = true
+                                case false:
+                                    viewModel.question[0].answeredWrong = true
+                                default:
+                                    viewModel.question[0].answeredCorrect = true
+                                }
+                                viewModel.saveData()
                             }
                         }
                     }) {
@@ -76,6 +95,15 @@ struct QuestionView: View {
                         for a in viewModel.answers {
                             if a.number == 2 {
                                 answerChosen = a.correct ? true : false
+                                switch answerChosen {
+                                case true:
+                                    viewModel.question[0].answeredCorrect = true
+                                case false:
+                                    viewModel.question[0].answeredWrong = true
+                                default:
+                                    viewModel.question[0].answeredCorrect = true
+                                }
+                                viewModel.saveData()
                             }
                         }
                     }) {
@@ -104,7 +132,13 @@ struct QuestionView: View {
             }
         }.task {
             viewModel.getQuestion(number)
+            if viewModel.question[0].answeredCorrect {
+                answerChosen = true
+            } else if viewModel.question[0].answeredWrong {
+                answerChosen = false
+            }
         }
+        .disabled(answerChosen != nil)
     }
     
     func setAnswerMessage(_ answer: Bool) -> Text {

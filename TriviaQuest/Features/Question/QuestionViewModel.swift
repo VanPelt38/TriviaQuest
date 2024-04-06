@@ -32,5 +32,13 @@ class QuestionViewModel: ObservableObject {
             }
         }
     }
+    
+    func saveData() {
+        do {
+            try context.save()
+        } catch {
+            print("error saving CD: \(error)")
+        }
+    }
 
 }
