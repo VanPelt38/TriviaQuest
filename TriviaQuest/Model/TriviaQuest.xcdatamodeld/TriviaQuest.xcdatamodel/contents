@@ -11,10 +11,10 @@
         <attribute name="answeredCorrect" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="answeredWrong" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="category" optional="YES" attributeType="String"/>
-        <attribute name="difficulty" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="difficulty" optional="YES" attributeType="String"/>
         <attribute name="number" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="text" optional="YES" attributeType="String"/>
-        <attribute name="type" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="type" optional="YES" attributeType="String"/>
         <relationship name="question2Answer" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Answer" inverseName="answer2Question" inverseEntity="Answer"/>
     </entity>
 </model>
