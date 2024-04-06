@@ -19,7 +19,16 @@ class AllQuestionsViewModel: ObservableObject {
     func persistQuestions(questionData: Data?) {
         
         if let data = questionData {
-  
+            do {
+                let result = try JSONDecoder().decode(TriviaResultsModel.self, from: data)
+                print("this is result: \(result)")
+                for question in result.results {
+                    print(question.category)
+                }
+            } catch {
+                print("failure decoding json: \(error)")
+            }
+            
         }
     }
 }
