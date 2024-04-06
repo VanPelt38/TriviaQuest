@@ -6,3 +6,11 @@
 //
 
 import Foundation
+
+class AllQuestionsViewModel: ObservableObject {
+    
+
+    func load15Questions(networkManager: NetworkManagerModule) {
+        networkManager.get15Questions()
+    }
+}
