@@ -7,12 +7,13 @@
 
 import CoreData
 
-struct PersistenceController {
+struct PersistenceController: PersistenceModule {
+
     static let shared = PersistenceController()
 
     static var preview: PersistenceController = {
-        let result = PersistenceController(inMemory: true)
-        let viewContext = result.container.viewContext
+        var result = PersistenceController(inMemory: true)
+        let viewContext = result.managedObjectContext
         for _ in 0..<10 {
 //            let newItem = Item(context: viewContext)
 //            newItem.timestamp = Date()
@@ -51,6 +52,9 @@ struct PersistenceController {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         })
-        container.viewContext.automaticallyMergesChangesFromParent = true
+        managedObjectContext.automaticallyMergesChangesFromParent = true
+    }
+    var managedObjectContext: NSManagedObjectContext {
+        container.viewContext
     }
 }

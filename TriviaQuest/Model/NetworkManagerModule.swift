@@ -9,5 +9,5 @@ import Foundation
 
 protocol NetworkManagerModule {
     
-    func get15Questions()
+    func get15Questions() async throws -> Data?
 }

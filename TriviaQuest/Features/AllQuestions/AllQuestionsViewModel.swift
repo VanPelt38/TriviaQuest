@@ -11,6 +11,15 @@ class AllQuestionsViewModel: ObservableObject {
     
 
     func load15Questions(networkManager: NetworkManagerModule) {
-        networkManager.get15Questions()
+        Task.init {
+            let questionResponse = try await networkManager.get15Questions()
+            self.persistQuestions(questionData: questionResponse)
+        }
+    }
+    func persistQuestions(questionData: Data?) {
+        
+        if let data = questionData {
+  
+        }
     }
 }

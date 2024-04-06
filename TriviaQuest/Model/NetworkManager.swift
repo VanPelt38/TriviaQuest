@@ -15,21 +15,14 @@ class NetworkManager: NetworkManagerModule {
         self.session = session
     }
     
-    func get15Questions() {
+    func get15Questions() async throws -> Data? {
 
-        guard let triviaURL = URL(string: "https://opentdb.com/api.php?amount=15") else { return }
-        let task = session.dataTask(with: triviaURL) { (data, response, error) in
+        guard let triviaURL = URL(string: "https://opentdb.com/api.php?amount=15") else { throw URLError(.badURL) }
+        let (data, _) = try await session.data(for: URLRequest(url: triviaURL))
             
-            if let e = error {
-                print("error retrieving 15 questions: \(e)")
-                return
-            }
-            if let response = data {
-                if let jsonString = String(data: response, encoding: .utf8) {
+                if let jsonString = String(data: data, encoding: .utf8) {
                     print("result \(jsonString)")
                 }
-            }
+           return data
         }
-        task.resume()
-    }
 }

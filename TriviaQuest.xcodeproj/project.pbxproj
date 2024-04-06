@@ -21,6 +21,7 @@
 		2329FAFB2BC18D0500AC5576 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2329FAFA2BC18D0500AC5576 /* WelcomeView.swift */; };
 		2329FAFD2BC1936400AC5576 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2329FAFC2BC1936400AC5576 /* NetworkManager.swift */; };
 		2329FAFF2BC193E900AC5576 /* NetworkManagerModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2329FAFE2BC193E900AC5576 /* NetworkManagerModule.swift */; };
+		2329FB012BC19F0F00AC5576 /* PersistenceModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2329FB002BC19F0F00AC5576 /* PersistenceModule.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,7 @@
 		2329FAFA2BC18D0500AC5576 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		2329FAFC2BC1936400AC5576 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		2329FAFE2BC193E900AC5576 /* NetworkManagerModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerModule.swift; sourceTree = "<group>"; };
+		2329FB002BC19F0F00AC5576 /* PersistenceModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceModule.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +139,7 @@
 			children = (
 				2329FACA2BC1879D00AC5576 /* TriviaQuest.xcdatamodeld */,
 				2329FAC82BC1879D00AC5576 /* Persistence.swift */,
+				2329FB002BC19F0F00AC5576 /* PersistenceModule.swift */,
 				2329FAFC2BC1936400AC5576 /* NetworkManager.swift */,
 				2329FAFE2BC193E900AC5576 /* NetworkManagerModule.swift */,
 			);
@@ -319,6 +322,7 @@
 			files = (
 				2329FAFD2BC1936400AC5576 /* NetworkManager.swift in Sources */,
 				2329FAC92BC1879D00AC5576 /* Persistence.swift in Sources */,
+				2329FB012BC19F0F00AC5576 /* PersistenceModule.swift in Sources */,
 				2329FAF82BC18CBD00AC5576 /* QuestionViewModel.swift in Sources */,
 				2329FAF32BC18C8600AC5576 /* AllQuestionsViewModel.swift in Sources */,
 				2329FAFB2BC18D0500AC5576 /* WelcomeView.swift in Sources */,
