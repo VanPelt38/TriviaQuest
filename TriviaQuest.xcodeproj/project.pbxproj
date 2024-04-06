@@ -8,14 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		2329FAC02BC1879C00AC5576 /* TriviaQuestApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2329FABF2BC1879C00AC5576 /* TriviaQuestApp.swift */; };
-		2329FAC22BC1879C00AC5576 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2329FAC12BC1879C00AC5576 /* ContentView.swift */; };
+		2329FAC22BC1879C00AC5576 /* AllQuestionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2329FAC12BC1879C00AC5576 /* AllQuestionsView.swift */; };
 		2329FAC42BC1879D00AC5576 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2329FAC32BC1879D00AC5576 /* Assets.xcassets */; };
-		2329FAC72BC1879D00AC5576 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2329FAC62BC1879D00AC5576 /* Preview Assets.xcassets */; };
 		2329FAC92BC1879D00AC5576 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2329FAC82BC1879D00AC5576 /* Persistence.swift */; };
 		2329FACC2BC1879D00AC5576 /* TriviaQuest.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2329FACA2BC1879D00AC5576 /* TriviaQuest.xcdatamodeld */; };
 		2329FAD62BC1879D00AC5576 /* TriviaQuestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2329FAD52BC1879D00AC5576 /* TriviaQuestTests.swift */; };
 		2329FAE02BC1879D00AC5576 /* TriviaQuestUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2329FADF2BC1879D00AC5576 /* TriviaQuestUITests.swift */; };
 		2329FAE22BC1879D00AC5576 /* TriviaQuestUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2329FAE12BC1879D00AC5576 /* TriviaQuestUITestsLaunchTests.swift */; };
+		2329FAF32BC18C8600AC5576 /* AllQuestionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2329FAF22BC18C8600AC5576 /* AllQuestionsViewModel.swift */; };
+		2329FAF62BC18CAE00AC5576 /* QuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2329FAF52BC18CAE00AC5576 /* QuestionView.swift */; };
+		2329FAF82BC18CBD00AC5576 /* QuestionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2329FAF72BC18CBD00AC5576 /* QuestionViewModel.swift */; };
+		2329FAFB2BC18D0500AC5576 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2329FAFA2BC18D0500AC5576 /* WelcomeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,9 +41,8 @@
 /* Begin PBXFileReference section */
 		2329FABC2BC1879C00AC5576 /* TriviaQuest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TriviaQuest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2329FABF2BC1879C00AC5576 /* TriviaQuestApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriviaQuestApp.swift; sourceTree = "<group>"; };
-		2329FAC12BC1879C00AC5576 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		2329FAC12BC1879C00AC5576 /* AllQuestionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllQuestionsView.swift; sourceTree = "<group>"; };
 		2329FAC32BC1879D00AC5576 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		2329FAC62BC1879D00AC5576 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2329FAC82BC1879D00AC5576 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		2329FACB2BC1879D00AC5576 /* TriviaQuest.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TriviaQuest.xcdatamodel; sourceTree = "<group>"; };
 		2329FAD12BC1879D00AC5576 /* TriviaQuestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TriviaQuestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -48,6 +50,10 @@
 		2329FADB2BC1879D00AC5576 /* TriviaQuestUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TriviaQuestUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2329FADF2BC1879D00AC5576 /* TriviaQuestUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriviaQuestUITests.swift; sourceTree = "<group>"; };
 		2329FAE12BC1879D00AC5576 /* TriviaQuestUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriviaQuestUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		2329FAF22BC18C8600AC5576 /* AllQuestionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllQuestionsViewModel.swift; sourceTree = "<group>"; };
+		2329FAF52BC18CAE00AC5576 /* QuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionView.swift; sourceTree = "<group>"; };
+		2329FAF72BC18CBD00AC5576 /* QuestionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionViewModel.swift; sourceTree = "<group>"; };
+		2329FAFA2BC18D0500AC5576 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,22 +104,11 @@
 		2329FABE2BC1879C00AC5576 /* TriviaQuest */ = {
 			isa = PBXGroup;
 			children = (
-				2329FABF2BC1879C00AC5576 /* TriviaQuestApp.swift */,
-				2329FAC12BC1879C00AC5576 /* ContentView.swift */,
-				2329FAC32BC1879D00AC5576 /* Assets.xcassets */,
-				2329FAC82BC1879D00AC5576 /* Persistence.swift */,
-				2329FACA2BC1879D00AC5576 /* TriviaQuest.xcdatamodeld */,
-				2329FAC52BC1879D00AC5576 /* Preview Content */,
+				2329FAEF2BC18A3200AC5576 /* Features */,
+				2329FAEE2BC18A1700AC5576 /* Model */,
+				2329FAF02BC18A8A00AC5576 /* Other */,
 			);
 			path = TriviaQuest;
-			sourceTree = "<group>";
-		};
-		2329FAC52BC1879D00AC5576 /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				2329FAC62BC1879D00AC5576 /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 		2329FAD42BC1879D00AC5576 /* TriviaQuestTests */ = {
@@ -131,6 +126,60 @@
 				2329FAE12BC1879D00AC5576 /* TriviaQuestUITestsLaunchTests.swift */,
 			);
 			path = TriviaQuestUITests;
+			sourceTree = "<group>";
+		};
+		2329FAEE2BC18A1700AC5576 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2329FACA2BC1879D00AC5576 /* TriviaQuest.xcdatamodeld */,
+				2329FAC82BC1879D00AC5576 /* Persistence.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2329FAEF2BC18A3200AC5576 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				2329FAF92BC18CCA00AC5576 /* Welcome */,
+				2329FAF12BC18C6900AC5576 /* AllQuestions */,
+				2329FAF42BC18C8E00AC5576 /* Question */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		2329FAF02BC18A8A00AC5576 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				2329FABF2BC1879C00AC5576 /* TriviaQuestApp.swift */,
+				2329FAC32BC1879D00AC5576 /* Assets.xcassets */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
+		2329FAF12BC18C6900AC5576 /* AllQuestions */ = {
+			isa = PBXGroup;
+			children = (
+				2329FAC12BC1879C00AC5576 /* AllQuestionsView.swift */,
+				2329FAF22BC18C8600AC5576 /* AllQuestionsViewModel.swift */,
+			);
+			path = AllQuestions;
+			sourceTree = "<group>";
+		};
+		2329FAF42BC18C8E00AC5576 /* Question */ = {
+			isa = PBXGroup;
+			children = (
+				2329FAF52BC18CAE00AC5576 /* QuestionView.swift */,
+				2329FAF72BC18CBD00AC5576 /* QuestionViewModel.swift */,
+			);
+			path = Question;
+			sourceTree = "<group>";
+		};
+		2329FAF92BC18CCA00AC5576 /* Welcome */ = {
+			isa = PBXGroup;
+			children = (
+				2329FAFA2BC18D0500AC5576 /* WelcomeView.swift */,
+			);
+			path = Welcome;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -237,7 +286,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2329FAC72BC1879D00AC5576 /* Preview Assets.xcassets in Resources */,
 				2329FAC42BC1879D00AC5576 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -264,8 +312,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				2329FAC92BC1879D00AC5576 /* Persistence.swift in Sources */,
+				2329FAF82BC18CBD00AC5576 /* QuestionViewModel.swift in Sources */,
+				2329FAF32BC18C8600AC5576 /* AllQuestionsViewModel.swift in Sources */,
+				2329FAFB2BC18D0500AC5576 /* WelcomeView.swift in Sources */,
 				2329FACC2BC1879D00AC5576 /* TriviaQuest.xcdatamodeld in Sources */,
-				2329FAC22BC1879C00AC5576 /* ContentView.swift in Sources */,
+				2329FAC22BC1879C00AC5576 /* AllQuestionsView.swift in Sources */,
+				2329FAF62BC18CAE00AC5576 /* QuestionView.swift in Sources */,
 				2329FAC02BC1879C00AC5576 /* TriviaQuestApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -353,7 +405,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -407,7 +459,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -424,7 +476,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"TriviaQuest/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 95N7NL8994;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -453,7 +505,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"TriviaQuest/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 95N7NL8994;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
