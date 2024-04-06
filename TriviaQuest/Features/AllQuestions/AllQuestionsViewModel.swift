@@ -54,7 +54,7 @@ class AllQuestionsViewModel: ObservableObject {
                         for answer in question.incorrect_answers {
                             let incorrectAnswer = Answer(context: context)
                             incorrectAnswer.answer2Question = newQuestion
-                            incorrectAnswer.correct = true
+                            incorrectAnswer.correct = false
                             incorrectAnswer.number = Int16(incorrectAnswerNo)
                             incorrectAnswerNo += 1
                             incorrectAnswer.text = answer

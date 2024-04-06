@@ -11,6 +11,8 @@ struct QuestionView: View {
     
     @StateObject private var viewModel = QuestionViewModel()
     @State var number: Int
+    @State private var answerChosen: Bool?
+    @State private var answerNumberChosen: Int?
     
     var body: some View {
         VStack {
@@ -21,10 +23,28 @@ struct QuestionView: View {
                 if !viewModel.answers.isEmpty {
                     ForEach (0..<viewModel.answers.count, id: \.self) { a in
                         Button(action: {
-                            print("hello")
+                            answerChosen = viewModel.answers[a].correct ? true : false
+                            answerNumberChosen = Int(viewModel.answers[a].number)
                         }) {
-                            Text(viewModel.answers[a].text ?? "no answer text")
+                            HStack {
+                                Text(viewModel.answers[a].text ?? "no answer text").foregroundColor(.white)
+                                if answerChosen != nil {
+                                    if viewModel.answers[a].correct {
+                                        Image("green-tick")
+                                            .resizable()
+                                            .frame(width: 20, height: 20)
+                                    } else if viewModel.answers[a].number == answerNumberChosen! {
+                                        Image("red-cross")
+                                            .resizable()
+                                            .frame(width: 20, height: 20)
+                                    }
+                                }
+                            }
                         }
+                        .background(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .fill(setAnswerColour(answerNo: a))
+                                )
                     }
                 } else {
                     Button(action: {
@@ -38,9 +58,32 @@ struct QuestionView: View {
                         Text("false")
                     }
                 }
+                if let answer = answerChosen {
+                    setAnswerMessage(answer)
+                }
             }
         }.task {
             viewModel.getQuestion(number)
+        }
+    }
+    
+    func setAnswerMessage(_ answer: Bool) -> Text {
+        return answer ? Text("Nice Going!").foregroundColor(Color.green) : Text("Better Luck Next Time...").foregroundColor(Color.red)
+    }
+    
+    func setAnswerColour(answerNo: Int) -> Color {
+        
+        switch answerNo {
+        case 0:
+            return .blue
+        case 1:
+            return .purple
+        case 2:
+            return .yellow
+        case 3:
+            return .mint
+        default:
+            return .blue
         }
     }
 }
