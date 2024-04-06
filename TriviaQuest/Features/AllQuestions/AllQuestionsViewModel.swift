@@ -31,7 +31,7 @@ class AllQuestionsViewModel: ObservableObject {
                 
                 for question in result.results {
                     
-                    var newQuestion = Question(context: context)
+                    let newQuestion = Question(context: context)
                     newQuestion.number = Int16(questionID)
                     questionID += 1
                     newQuestion.category = question.category

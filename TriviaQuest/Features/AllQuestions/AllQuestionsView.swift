@@ -22,13 +22,12 @@ struct AllQuestionsView: View {
         NavigationView {
             List {
                 ForEach(0..<viewModel.questions.count, id: \.self) { question in
-                                    NavigationLink {
-                                        Text(viewModel.questions[question].text ?? "no question")
-                                    } label: {
-                                        Text(viewModel.questions[question].text ?? "no question")
-                                    }
-                                }
-            }
+
+                    NavigationLink(destination: QuestionView()) {
+                        QuestionRow(text: viewModel.questions[question].text ?? "no question", category: "Category: \(viewModel.questions[question].category ?? "no category")", difficulty: "Difficulty: \( viewModel.questions[question].difficulty ?? "no difficulty")")
+                    }
+                }
+            }.listRowInsets(EdgeInsets())
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     EditButton()
@@ -41,8 +40,27 @@ struct AllQuestionsView: View {
             }.task {
                 viewModel.load15Questions(networkManager: NetworkManager(session: URLSession.shared))
             }
-            Text("Select an item here")
         }
+    }
+}
+
+struct QuestionRow: View {
+    
+    var text: String
+    var category: String
+    var difficulty: String
+    var body: some View {
+        VStack {
+            Text(text)
+                .foregroundColor(.black)
+                .background(.white)
+                .cornerRadius(20)
+            HStack {
+                Text(category).foregroundColor(.blue)
+                Text(difficulty).foregroundColor(.red)
+            }
+        }
+        .padding(.vertical, 5)
     }
 }
 
