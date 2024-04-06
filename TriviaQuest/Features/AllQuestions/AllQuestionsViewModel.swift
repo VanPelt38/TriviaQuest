@@ -11,13 +11,16 @@ import CoreData
 class AllQuestionsViewModel: ObservableObject {
     
     let context = PersistenceController.shared.managedObjectContext
+    @Published var questions: [Question] = []
 
     func load15Questions(networkManager: NetworkManagerModule) {
         Task.init {
             let questionResponse = try await networkManager.get15Questions()
             self.persistQuestions(questionData: questionResponse)
+            self.getLoadedQuestions()
         }
     }
+    
     func persistQuestions(questionData: Data?) {
         
         if let data = questionData {
@@ -55,7 +58,7 @@ class AllQuestionsViewModel: ObservableObject {
                         }
                     }
                 }
-                saveData()
+                saveData(coreDataService: PersistenceController.shared)
             } catch {
                 print("failure decoding json: \(error)")
             }
@@ -63,11 +66,27 @@ class AllQuestionsViewModel: ObservableObject {
         }
     }
     
-    func saveData() {
+    func saveData(coreDataService: PersistenceModule) {
+        
         do {
-            try context.save()
+            try coreDataService.managedObjectContext.save()
         } catch {
             print("error saving questions")
+        }
+    }
+    
+    func getLoadedQuestions() {
+        
+        if questions.isEmpty {
+            
+            let request: NSFetchRequest<Question> = Question.fetchRequest()
+            let sortDescriptor = NSSortDescriptor(key: "number", ascending: true)
+            request.sortDescriptors = [sortDescriptor]
+            do {
+                questions = try context.fetch(request)
+            } catch {
+                print("error loading issues from CD: \(error)")
+            }
         }
     }
 
