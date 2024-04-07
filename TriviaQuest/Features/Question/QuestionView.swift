@@ -19,9 +19,10 @@ struct QuestionView: View {
            
         VStack {
             if !viewModel.question.isEmpty {
-                Text(viewModel.question[0].text ?? "no question")
-                Text(viewModel.question[0].category ?? "no category")
-                Text(viewModel.question[0].difficulty ?? "no difficulty")
+                Text(viewModel.question[0].text ?? "no question").fontWeight(.bold).padding(EdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20)).font(Font.custom("New", size: 30))
+                Text("Category: \(viewModel.question[0].category ?? "no category")").font(.footnote).italic().foregroundColor(.blue)
+                Text("Difficulty: \(viewModel.question[0].difficulty ?? "no difficulty")").font(.footnote).italic().foregroundColor(.red)
+                Spacer()
                 if !viewModel.answers.isEmpty && viewModel.answers.count > 2 {
                     ForEach (0..<viewModel.answers.count, id: \.self) { a in
                         Button(action: {
@@ -35,7 +36,7 @@ struct QuestionView: View {
                                 viewModel.question[0].answeredCorrect = true
                             }
                             viewModel.question[0].incorrectAnswerChosen = viewModel.answers[a].number
-                            viewModel.saveData()
+                            viewModel.saveData(coreDataService: PersistenceController.shared)
                         }) {
                             HStack {
                                 Text(viewModel.answers[a].text ?? "no answer text").foregroundColor(.white).padding(EdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10))
@@ -70,8 +71,7 @@ struct QuestionView: View {
                                 default:
                                     viewModel.question[0].answeredCorrect = true
                                 }
-                                viewModel.saveData()
-                            }
+                                viewModel.saveData(coreDataService: PersistenceController.shared)                            }
                         }
                     }) {
                         HStack{
@@ -104,7 +104,7 @@ struct QuestionView: View {
                                 default:
                                     viewModel.question[0].answeredCorrect = true
                                 }
-                                viewModel.saveData()
+                                viewModel.saveData(coreDataService: PersistenceController.shared)
                             }
                         }
                     }) {
@@ -127,12 +127,14 @@ struct QuestionView: View {
                             .fill(setAnswerColour(answerNo: 1))
                     )
                 }
+                Spacer()
                 if let answer = answerChosen {
                     setAnswerMessage(answer)
                 }
+                Spacer()
             }
         }.background(
-            RoundedRectangle(cornerRadius: 10).fill(.white)
+            RoundedRectangle(cornerRadius: 10).fill(.white).padding(EdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5))
         )
         .task {
                 viewModel.getQuestion(number)
@@ -153,7 +155,7 @@ struct QuestionView: View {
     }
     
     func setAnswerMessage(_ answer: Bool) -> Text {
-        return answer ? Text("Nice Going!").foregroundColor(Color.green) : Text("Better Luck Next Time...").foregroundColor(Color.red)
+        return answer ? Text("Nice Going!").foregroundColor(Color.green).bold() : Text("Better Luck Next Time...").foregroundColor(Color.red).bold()
     }
     
     func setAnswerColour(answerNo: Int) -> Color {

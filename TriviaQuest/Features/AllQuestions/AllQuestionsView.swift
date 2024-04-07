@@ -10,6 +10,10 @@ import CoreData
 
 struct AllQuestionsView: View {
     
+    init(){
+            UITableView.appearance().backgroundColor = UIColor(Color.blue)
+        }
+    
     @StateObject private var viewModel = AllQuestionsViewModel()
     @Environment(\.managedObjectContext) private var viewContext
     @State private var searchText = ""
@@ -34,10 +38,7 @@ struct AllQuestionsView: View {
                         QuestionRow(text: viewModel.questions[question].text ?? "no question", category: "Category: \(viewModel.questions[question].category ?? "no category")", difficulty: "Difficulty: \( viewModel.questions[question].difficulty ?? "no difficulty")", answeredCorrectly: viewModel.questions[question].answeredCorrect, answeredIncorrectly: viewModel.questions[question].answeredWrong)
                     }
                 }.listRowBackground(Color.clear)
-            }.onAppear {
-                        UITableView.appearance().backgroundColor = .clear
-                    }
-            .listRowInsets(EdgeInsets())
+            }.background(.blue)
                 .task {
                     Task.init {
                         await viewModel.load15Questions(networkManager: NetworkManager(session: URLSession.shared))
@@ -61,12 +62,11 @@ struct QuestionRow: View {
         VStack {
             Text(text)
                 .foregroundColor(.black)
-                .background(.white)
-                .cornerRadius(20)
-                
+                .fontWeight(.bold)
+                .multilineTextAlignment(.center)
             HStack {
-                Text(category).foregroundColor(.blue)
-                Text(difficulty).foregroundColor(.red)
+                Text(category).foregroundColor(.blue).font(.footnote).italic()
+                Text(difficulty).foregroundColor(.red).font(.footnote).italic()
                 if answeredCorrectly {
                     Image("green-tick")
                         .resizable()
@@ -79,7 +79,9 @@ struct QuestionRow: View {
                 }
                 }
         }
-        .padding(.vertical, 5)
+        .padding(EdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10))
+        .background(.white)
+        .cornerRadius(20)
     }
 }
 

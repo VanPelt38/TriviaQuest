@@ -24,6 +24,7 @@
 		2329FB012BC19F0F00AC5576 /* PersistenceModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2329FB002BC19F0F00AC5576 /* PersistenceModule.swift */; };
 		2329FB032BC1A5A000AC5576 /* QuestionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2329FB022BC1A5A000AC5576 /* QuestionModel.swift */; };
 		2329FB072BC1A80300AC5576 /* TriviaResultsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2329FB062BC1A80300AC5576 /* TriviaResultsModel.swift */; };
+		236A60A52BC2CA2F00DBE82A /* TestPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236A60A42BC2CA2F00DBE82A /* TestPersistence.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,7 @@
 		2329FB002BC19F0F00AC5576 /* PersistenceModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceModule.swift; sourceTree = "<group>"; };
 		2329FB022BC1A5A000AC5576 /* QuestionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionModel.swift; sourceTree = "<group>"; };
 		2329FB062BC1A80300AC5576 /* TriviaResultsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriviaResultsModel.swift; sourceTree = "<group>"; };
+		236A60A42BC2CA2F00DBE82A /* TestPersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestPersistence.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +143,7 @@
 		2329FAEE2BC18A1700AC5576 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				236A60A32BC2C97E00DBE82A /* Test Dependencies */,
 				2329FACA2BC1879D00AC5576 /* TriviaQuest.xcdatamodeld */,
 				2329FAC82BC1879D00AC5576 /* Persistence.swift */,
 				2329FB002BC19F0F00AC5576 /* PersistenceModule.swift */,
@@ -195,6 +198,14 @@
 				2329FAFA2BC18D0500AC5576 /* WelcomeView.swift */,
 			);
 			path = Welcome;
+			sourceTree = "<group>";
+		};
+		236A60A32BC2C97E00DBE82A /* Test Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				236A60A42BC2CA2F00DBE82A /* TestPersistence.swift */,
+			);
+			path = "Test Dependencies";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -333,6 +344,7 @@
 				2329FAF32BC18C8600AC5576 /* AllQuestionsViewModel.swift in Sources */,
 				2329FAFB2BC18D0500AC5576 /* WelcomeView.swift in Sources */,
 				2329FACC2BC1879D00AC5576 /* TriviaQuest.xcdatamodeld in Sources */,
+				236A60A52BC2CA2F00DBE82A /* TestPersistence.swift in Sources */,
 				2329FAC22BC1879C00AC5576 /* AllQuestionsView.swift in Sources */,
 				2329FAF62BC18CAE00AC5576 /* QuestionView.swift in Sources */,
 				2329FB032BC1A5A000AC5576 /* QuestionModel.swift in Sources */,

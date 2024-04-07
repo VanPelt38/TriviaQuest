@@ -33,9 +33,9 @@ class QuestionViewModel: ObservableObject {
         }
     }
     
-    func saveData() {
+    func saveData(coreDataService: PersistenceModule) {
         do {
-            try context.save()
+            try coreDataService.managedObjectContext.save()
         } catch {
             print("error saving CD: \(error)")
         }
