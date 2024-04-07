@@ -104,8 +104,9 @@ final class TriviaQuestTests: XCTestCase {
         } catch {
             print("error saving CD: \(error)")
         }
-        allQuestionsVM.getLoadedQuestions(coreDataService: testPersistence)
-        XCTAssertEqual(allQuestionsVM.questions.first?.number, 5)
+        allQuestionsVM.getLoadedQuestions(coreDataService: testPersistence) {
+            XCTAssertEqual(allQuestionsVM.questions.first?.number, 5)
+        }
     }
     
     func testGetLoadedQuestionsSortsQuestions() {
@@ -123,8 +124,9 @@ final class TriviaQuestTests: XCTestCase {
         } catch {
             print("error saving CD: \(error)")
         }
-        allQuestionsVM.getLoadedQuestions(coreDataService: testPersistence)
-        XCTAssertEqual(allQuestionsVM.questions.map { $0.number }, [5, 6, 8])
+        allQuestionsVM.getLoadedQuestions(coreDataService: testPersistence) {
+            XCTAssertEqual(allQuestionsVM.questions.map { $0.number }, [5, 6, 8])
+        }
     }
     
     

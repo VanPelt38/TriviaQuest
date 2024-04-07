@@ -14,17 +14,18 @@ class AllQuestionsViewModel: ObservableObject {
     @Published var networkErrorAlert = false
 
     func load15Questions(networkManager: NetworkManagerModule) async {
-        Task.init {
-            self.getLoadedQuestions(coreDataService: PersistenceController.shared)
-            if questions.isEmpty {
-                do {
-                    let questionResponse = try await networkManager.get15Questions()
-                    self.persistQuestions(questionData: questionResponse, coreDataService: PersistenceController.shared)
-                    self.getLoadedQuestions(coreDataService: PersistenceController.shared)
-                } catch {
-                    print("error loading questions: \(error)")
-                    DispatchQueue.main.async {
-                        self.networkErrorAlert = true
+        getLoadedQuestions(coreDataService: PersistenceController.shared) { [self] in
+            Task.init {
+                if questions.isEmpty {
+                    do {
+                        let questionResponse = try await networkManager.get15Questions()
+                        self.persistQuestions(questionData: questionResponse, coreDataService: PersistenceController.shared)
+                        self.getLoadedQuestions(coreDataService: PersistenceController.shared) {}
+                    } catch {
+                        print("error loading questions: \(error)")
+                        DispatchQueue.main.async {
+                            self.networkErrorAlert = true
+                        }
                     }
                 }
             }
@@ -103,18 +104,20 @@ class AllQuestionsViewModel: ObservableObject {
         }
     }
     
-    func getLoadedQuestions(coreDataService: PersistenceModule) {
+    func getLoadedQuestions(coreDataService: PersistenceModule, completion: @escaping () -> Void) {
             
+        DispatchQueue.main.async { [self] in
             questions = []
             let request: NSFetchRequest<Question> = Question.fetchRequest()
             let sortDescriptor = NSSortDescriptor(key: "number", ascending: true)
             request.sortDescriptors = [sortDescriptor]
             do {
                 questions = try coreDataService.managedObjectContext.fetch(request)
-                print("questions loaded: \(questions.count)")
             } catch {
                 print("error loading issues from CD: \(error)")
             }
+            completion()
+        }
     }
 
 }

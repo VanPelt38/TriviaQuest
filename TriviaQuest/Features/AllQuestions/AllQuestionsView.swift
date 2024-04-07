@@ -10,10 +10,6 @@ import CoreData
 
 struct AllQuestionsView: View {
     
-    init(){
-            UITableView.appearance().backgroundColor = UIColor(Color.blue)
-        }
-    
     @StateObject private var viewModel = AllQuestionsViewModel()
     @Environment(\.managedObjectContext) private var viewContext
     @State private var searchText = ""
