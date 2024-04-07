@@ -31,6 +31,42 @@ final class TriviaQuestTests: XCTestCase {
     
     // Persist Questions Tests
     
+    func testPersistQuestionsHandlesNilData() {
+        
+        let allQuestionsVM = AllQuestionsViewModel()
+        let testPersistence = TestPersistence.shared
+        let expectation = XCTestExpectation(description: "network error alert = true")
+        allQuestionsVM.persistQuestions(questionData: nil, coreDataService: testPersistence)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            XCTAssertTrue(allQuestionsVM.networkErrorAlert)
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 1.0)
+    }
+    
+    func testPersistQuestionsSavesCorrectly() {
+        
+        let allQuestionsVM = AllQuestionsViewModel()
+        let testPersistence = TestPersistence.shared
+
+        let bundle = Bundle(for: TriviaQuestTests.self)
+            guard let url = bundle.url(forResource: "testJSONResponse", withExtension: "json"),
+                  let jsonData = try? Data(contentsOf: url) else {
+                fatalError("Failed to load mock JSON data")
+            }
+        allQuestionsVM.persistQuestions(questionData: jsonData, coreDataService: testPersistence)
+        let request: NSFetchRequest<Question> = Question.fetchRequest()
+        let sortDescriptor = NSSortDescriptor(key: "number", ascending: true)
+        request.sortDescriptors = [sortDescriptor]
+        var results: [Question] = []
+        do {
+            results = try testPersistence.managedObjectContext.fetch(request)
+        } catch {
+            print("error loading issues from CD: \(error)")
+        }
+        XCTAssertEqual(results[0].text, "What does a funambulist walk on?")
+        XCTAssertEqual(results[1].text, "Which of these is not an additional variation of the color purple?")
+    }
     
     // Save Data Tests
     

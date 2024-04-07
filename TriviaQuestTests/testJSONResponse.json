@@ -1,0 +1,22 @@
+
+{
+    "response_code": 0,
+    "results": [
+        {
+            "type": "multiple",
+            "difficulty": "easy",
+            "category": "General Knowledge",
+            "question": "What does a funambulist walk on?",
+            "correct_answer": "A Tight Rope",
+            "incorrect_answers": ["Broken Glass", "Balls", "The Moon"]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "medium",
+            "category": "Art",
+            "question": "Which of these is not an additional variation of the color purple?",
+            "correct_answer": "Kobicha",
+            "incorrect_answers": ["Pomp and Power", "Byzantium", "Palatinate"]
+        }
+    ]
+}

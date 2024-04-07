@@ -81,8 +81,16 @@ class AllQuestionsViewModel: ObservableObject {
                 saveData(coreDataService: PersistenceController.shared)
             } catch {
                 print("failure decoding json: \(error)")
+                DispatchQueue.main.async {
+                    self.networkErrorAlert = true
+                }
             }
             
+        } else {
+            print("nil data returned from api")
+            DispatchQueue.main.async {
+                self.networkErrorAlert = true
+            }
         }
     }
     

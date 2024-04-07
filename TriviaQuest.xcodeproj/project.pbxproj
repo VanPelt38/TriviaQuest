@@ -25,6 +25,7 @@
 		2329FB032BC1A5A000AC5576 /* QuestionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2329FB022BC1A5A000AC5576 /* QuestionModel.swift */; };
 		2329FB072BC1A80300AC5576 /* TriviaResultsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2329FB062BC1A80300AC5576 /* TriviaResultsModel.swift */; };
 		236A60A52BC2CA2F00DBE82A /* TestPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236A60A42BC2CA2F00DBE82A /* TestPersistence.swift */; };
+		236A60A72BC2F4FA00DBE82A /* testJSONResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 236A60A62BC2F4FA00DBE82A /* testJSONResponse.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,7 @@
 		2329FB022BC1A5A000AC5576 /* QuestionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionModel.swift; sourceTree = "<group>"; };
 		2329FB062BC1A80300AC5576 /* TriviaResultsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriviaResultsModel.swift; sourceTree = "<group>"; };
 		236A60A42BC2CA2F00DBE82A /* TestPersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestPersistence.swift; sourceTree = "<group>"; };
+		236A60A62BC2F4FA00DBE82A /* testJSONResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = testJSONResponse.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				2329FAD52BC1879D00AC5576 /* TriviaQuestTests.swift */,
+				236A60A62BC2F4FA00DBE82A /* testJSONResponse.json */,
 			);
 			path = TriviaQuestTests;
 			sourceTree = "<group>";
@@ -320,6 +323,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				236A60A72BC2F4FA00DBE82A /* testJSONResponse.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
