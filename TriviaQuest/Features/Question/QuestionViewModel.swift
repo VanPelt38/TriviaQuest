@@ -10,17 +10,16 @@ import CoreData
 
 class QuestionViewModel: ObservableObject {
     
-    let context = PersistenceController.shared.managedObjectContext
     @Published var question: [Question] = []
     @Published var answers: [Answer] = []
     
-    func getQuestion(_ number: Int) {
+    func getQuestion(_ number: Int, coreDataService: PersistenceModule) {
             
             let request: NSFetchRequest<Question> = Question.fetchRequest()
             let predicate = NSPredicate(format: "number == %d", number)
             request.predicate = predicate
             do {
-                question = try context.fetch(request)
+                question = try coreDataService.managedObjectContext.fetch(request)
             } catch {
                 print("error loading issues from CD: \(error)")
             }

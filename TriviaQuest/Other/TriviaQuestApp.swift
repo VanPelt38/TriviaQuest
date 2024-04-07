@@ -9,12 +9,10 @@ import SwiftUI
 
 @main
 struct TriviaQuestApp: App {
-    let persistenceController = PersistenceController.shared
 
     var body: some Scene {
         WindowGroup {
             WelcomeView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
 }

@@ -13,7 +13,7 @@ class TestPersistence: PersistenceModule {
     static let shared = TestPersistence()
     
     lazy var managedObjectContext: NSManagedObjectContext = {
-        let dataModelName = "TriviaQuest"
+        let dataModelName = "TriviaQuestTest"
         let managedObjectModel = NSManagedObjectModel.mergedModel(from: [Bundle(for: TestPersistence.self)])!
         
         let container = NSPersistentContainer(name: dataModelName, managedObjectModel: managedObjectModel)

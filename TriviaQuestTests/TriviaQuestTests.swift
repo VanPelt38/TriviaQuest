@@ -7,6 +7,7 @@
 
 import XCTest
 import SwiftUI
+import CoreData
 @testable import TriviaQuest
 
 final class TriviaQuestTests: XCTestCase {
@@ -59,6 +60,26 @@ final class TriviaQuestTests: XCTestCase {
     
     
     // Save Data Tests
+    
+    func testDataSavesCorrectly() {
+        
+        let questionVM = QuestionViewModel()
+        let testPersistence = TestPersistence.shared
+        let newQuestion = Question(context: testPersistence.managedObjectContext)
+        let testText = "CD Entity persisted correctly"
+        newQuestion.text = testText
+        questionVM.saveData(coreDataService: testPersistence)
+        let request: NSFetchRequest<Question> = Question.fetchRequest()
+        let predicate = NSPredicate(format: "text == %@", testText)
+        request.predicate = predicate
+        var result: [Question] = []
+        do {
+            result = try testPersistence.managedObjectContext.fetch(request)
+        } catch {
+            print("error loading issues from CD: \(error)")
+        }
+        XCTAssertEqual(result.first?.text, testText)
+    }
     
     
     //MARK: - Network Manager Tests

@@ -137,7 +137,7 @@ struct QuestionView: View {
             RoundedRectangle(cornerRadius: 10).fill(.white).padding(EdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5))
         )
         .task {
-                viewModel.getQuestion(number)
+            viewModel.getQuestion(number, coreDataService: PersistenceController.shared)
                 if viewModel.question[0].answeredCorrect {
                     answerChosen = true
                 } else if viewModel.question[0].answeredWrong {
