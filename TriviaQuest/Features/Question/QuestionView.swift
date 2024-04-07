@@ -16,7 +16,6 @@ struct QuestionView: View {
     
     var body: some View {
         ZStack {
-            
             VStack {
                 if !viewModel.question.isEmpty {
                     Text(viewModel.question[0].text ?? "no question").fontWeight(.bold).padding(EdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20)).font(Font.custom("New", size: 30))
@@ -184,8 +183,8 @@ struct QuestionView: View {
     }
 }
 
-//struct QuestionView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        QuestionView(number: )
-//    }
-//}
+struct QuestionView_Previews: PreviewProvider {
+    static var previews: some View {
+        QuestionView(number: 1)
+    }
+}

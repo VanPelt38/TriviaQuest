@@ -11,7 +11,6 @@ import CoreData
 struct AllQuestionsView: View {
     
     @StateObject private var viewModel = AllQuestionsViewModel()
-    @Environment(\.managedObjectContext) private var viewContext
     @State private var searchText = ""
     var filteredQuestions: [Question] {
         viewModel.questions.filter { question in
@@ -21,22 +20,20 @@ struct AllQuestionsView: View {
                 return question.text?.lowercased().contains(searchText.lowercased()) ?? false
             }
         }
-
+        
     }
     
     var body: some View {
         NavigationView {
             VStack {
-            List {
-                ForEach(0..<filteredQuestions.count, id: \.self) { question in
-                    
-                    NavigationLink(destination: QuestionView(number: Int(filteredQuestions[question].number) )) {
-                        QuestionRow(text: filteredQuestions[question].text ?? "no question", category: "Category: \(filteredQuestions[question].category ?? "no category")", difficulty: "Difficulty: \( filteredQuestions[question].difficulty ?? "no difficulty")", answeredCorrectly: filteredQuestions[question].answeredCorrect, answeredIncorrectly: filteredQuestions[question].answeredWrong)
-                    }.listRowSeparator(.hidden)
-                }.listRowBackground(Color.clear)
-            }
-            .background(.blue)
-                .task {
+                List {
+                    ForEach(0..<filteredQuestions.count, id: \.self) { question in
+                        
+                        NavigationLink(destination: QuestionView(number: Int(filteredQuestions[question].number) )) {
+                            QuestionRow(text: filteredQuestions[question].text ?? "no question", category: "Category: \(filteredQuestions[question].category ?? "no category")", difficulty: "Difficulty: \( filteredQuestions[question].difficulty ?? "no difficulty")", answeredCorrectly: filteredQuestions[question].answeredCorrect, answeredIncorrectly: filteredQuestions[question].answeredWrong)
+                        }.listRowSeparator(.hidden)
+                    }.listRowBackground(Color.clear)
+                }.task {
                     Task.init {
                         await viewModel.load15Questions(networkManager: NetworkManager(session: URLSession.shared), coreDataService: PersistenceController.shared)
                     }
@@ -44,12 +41,9 @@ struct AllQuestionsView: View {
                 .alert("There was an error loading the questions. Please check your network connection and restart the app.", isPresented: $viewModel.networkErrorAlert) {
                     Button("OK", role: .cancel) {}
                 }
-            }.background(            Rectangle()
-                .fill(Color.blue)
-                .edgesIgnoringSafeArea(.all))
-            .searchable(text: $searchText)
-            .navigationTitle("Today's Questions")
-        }.background(Color.blue)
+            }.searchable(text: $searchText)
+                .navigationTitle("Today's Questions")
+        }
     }
 }
 
@@ -79,7 +73,7 @@ struct QuestionRow: View {
                         .resizable()
                         .frame(width: 20, height: 20)
                 }
-                }
+            }
         }
         .padding(EdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10))
         .background(.white)

@@ -12,9 +12,9 @@ class AllQuestionsViewModel: ObservableObject {
     
     @Published var questions: [Question] = []
     @Published var networkErrorAlert = false
-
+    
     func load15Questions(networkManager: NetworkManagerModule, coreDataService: PersistenceModule) async {
-
+        
         getLoadedQuestions(coreDataService: coreDataService) { [self] in
             Task.init {
                 if questions.isEmpty {
@@ -51,8 +51,8 @@ class AllQuestionsViewModel: ObservableObject {
                     newQuestion.text = question.question
                     newQuestion.type = question.type
                     if question.type == "multiple" {
-                    
-                    let correctAnswer = Answer(context: coreDataService.managedObjectContext)
+                        
+                        let correctAnswer = Answer(context: coreDataService.managedObjectContext)
                         correctAnswer.answer2Question = newQuestion
                         correctAnswer.correct = true
                         correctAnswer.number = 1
@@ -87,7 +87,6 @@ class AllQuestionsViewModel: ObservableObject {
                     self.networkErrorAlert = true
                 }
             }
-            
         } else {
             print("nil data returned from api")
             DispatchQueue.main.async {
@@ -106,7 +105,7 @@ class AllQuestionsViewModel: ObservableObject {
     }
     
     func getLoadedQuestions(coreDataService: PersistenceModule, completion: @escaping () -> Void) {
-            print(2)
+        
         DispatchQueue.main.async { [self] in
             questions = []
             let request: NSFetchRequest<Question> = Question.fetchRequest()
@@ -120,5 +119,4 @@ class AllQuestionsViewModel: ObservableObject {
             completion()
         }
     }
-
 }
