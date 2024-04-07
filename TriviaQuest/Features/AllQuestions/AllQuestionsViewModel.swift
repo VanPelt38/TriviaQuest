@@ -13,14 +13,15 @@ class AllQuestionsViewModel: ObservableObject {
     @Published var questions: [Question] = []
     @Published var networkErrorAlert = false
 
-    func load15Questions(networkManager: NetworkManagerModule) async {
-        getLoadedQuestions(coreDataService: PersistenceController.shared) { [self] in
+    func load15Questions(networkManager: NetworkManagerModule, coreDataService: PersistenceModule) async {
+
+        getLoadedQuestions(coreDataService: coreDataService) { [self] in
             Task.init {
                 if questions.isEmpty {
                     do {
                         let questionResponse = try await networkManager.get15Questions()
-                        self.persistQuestions(questionData: questionResponse, coreDataService: PersistenceController.shared)
-                        self.getLoadedQuestions(coreDataService: PersistenceController.shared) {}
+                        self.persistQuestions(questionData: questionResponse, coreDataService: coreDataService)
+                        self.getLoadedQuestions(coreDataService: coreDataService) {}
                     } catch {
                         print("error loading questions: \(error)")
                         DispatchQueue.main.async {
@@ -105,7 +106,7 @@ class AllQuestionsViewModel: ObservableObject {
     }
     
     func getLoadedQuestions(coreDataService: PersistenceModule, completion: @escaping () -> Void) {
-            
+            print(2)
         DispatchQueue.main.async { [self] in
             questions = []
             let request: NSFetchRequest<Question> = Question.fetchRequest()

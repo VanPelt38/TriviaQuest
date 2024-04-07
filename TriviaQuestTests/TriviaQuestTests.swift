@@ -39,7 +39,56 @@ final class TriviaQuestTests: XCTestCase {
     
     // Load 15 Questions Tests
     
+    func testLoad15QuestionsLoadsOnFirstLaunch() {
+        
+        let allQuestionsVM = AllQuestionsViewModel()
+        let testPersistence = TestPersistence.shared
+        let testNetworkManager = TestNetworkManager()
+        let expectation = XCTestExpectation(description: "questions are loaded")
+        let bundle = Bundle(for: TriviaQuestTests.self)
+            guard let url = bundle.url(forResource: "testJSONResponse", withExtension: "json"),
+                  let jsonData = try? Data(contentsOf: url) else {
+                fatalError("Failed to load mock JSON data")
+            }
+        testNetworkManager.testData = jsonData
+        Task.init {
+            await allQuestionsVM.load15Questions(networkManager: testNetworkManager, coreDataService: testPersistence)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                XCTAssertEqual(allQuestionsVM.questions[0].difficulty, "easy")
+                XCTAssertEqual(allQuestionsVM.questions[1].difficulty, "medium")
+                expectation.fulfill()
+            }
+        }
+        wait(for: [expectation], timeout: 2.0)
+    }
     
+    func testLoad15QuestionsSubsequentLoads() {
+        
+        let allQuestionsVM = AllQuestionsViewModel()
+        let testPersistence = TestPersistence.shared
+        let testNetworkManager = TestNetworkManager()
+        let newQuestion1 = Question(context: testPersistence.managedObjectContext)
+        let testText = "CD Entity 1 persisted correctly"
+        newQuestion1.text = testText
+        let newQuestion2 = Question(context: testPersistence.managedObjectContext)
+        let testText2 = "CD Entity 2 persisted correctly"
+        newQuestion2.text = testText2
+        do {
+            try testPersistence.managedObjectContext.save()
+        } catch {
+            print("failed to save entities: \(error)")
+        }
+        let expectation = XCTestExpectation(description: "questions are loaded")
+        Task.init {
+            await allQuestionsVM.load15Questions(networkManager: testNetworkManager, coreDataService: testPersistence)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                XCTAssertEqual(allQuestionsVM.questions[0].text, testText)
+                XCTAssertEqual(allQuestionsVM.questions[1].text, testText2)
+                expectation.fulfill()
+            }
+        }
+        wait(for: [expectation], timeout: 2.0)
+    }
     
     // Persist Questions Tests
     
@@ -50,7 +99,6 @@ final class TriviaQuestTests: XCTestCase {
         let expectation = XCTestExpectation(description: "network error alert = true")
         allQuestionsVM.persistQuestions(questionData: nil, coreDataService: testPersistence)
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            print("this is status: \(allQuestionsVM.networkErrorAlert) about to assert ")
             XCTAssertTrue(allQuestionsVM.networkErrorAlert)
             expectation.fulfill()
         }

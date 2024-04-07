@@ -38,7 +38,7 @@ struct AllQuestionsView: View {
             .background(.blue)
                 .task {
                     Task.init {
-                        await viewModel.load15Questions(networkManager: NetworkManager(session: URLSession.shared))
+                        await viewModel.load15Questions(networkManager: NetworkManager(session: URLSession.shared), coreDataService: PersistenceController.shared)
                     }
                 }
                 .alert("There was an error loading the questions. Please check your network connection and restart the app.", isPresented: $viewModel.networkErrorAlert) {
