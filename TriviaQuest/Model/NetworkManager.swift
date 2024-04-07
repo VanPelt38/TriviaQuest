@@ -19,10 +19,7 @@ class NetworkManager: NetworkManagerModule {
 
         guard let triviaURL = URL(string: "https://opentdb.com/api.php?amount=15") else { throw URLError(.badURL) }
         let (data, _) = try await session.data(for: URLRequest(url: triviaURL))
-            
-                if let jsonString = String(data: data, encoding: .utf8) {
-                    print("result \(jsonString)")
-                }
+        
            return data
         }
 }

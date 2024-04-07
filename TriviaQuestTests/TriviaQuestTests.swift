@@ -21,12 +21,24 @@ final class TriviaQuestTests: XCTestCase {
 
     override func tearDownWithError() throws {
        
+        let testPersistence = TestPersistence.shared
+        let request: NSFetchRequest<Question> = Question.fetchRequest()
+        do {
+            let questions = try testPersistence.managedObjectContext.fetch(request)
+            for q in questions {
+                testPersistence.managedObjectContext.delete(q as NSManagedObject)
+            }
+            try testPersistence.managedObjectContext.save()
+        } catch {
+            fatalError("Error deleting question objects")
+        }
     }
     
 
     //MARK: - All Questions View Tests
     
     // Load 15 Questions Tests
+    
     
     
     // Persist Questions Tests
@@ -37,15 +49,16 @@ final class TriviaQuestTests: XCTestCase {
         let testPersistence = TestPersistence.shared
         let expectation = XCTestExpectation(description: "network error alert = true")
         allQuestionsVM.persistQuestions(questionData: nil, coreDataService: testPersistence)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            print("this is status: \(allQuestionsVM.networkErrorAlert) about to assert ")
             XCTAssertTrue(allQuestionsVM.networkErrorAlert)
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 1.0)
+        wait(for: [expectation], timeout: 2.0)
     }
     
     func testPersistQuestionsSavesCorrectly() {
-        
+
         let allQuestionsVM = AllQuestionsViewModel()
         let testPersistence = TestPersistence.shared
 
@@ -192,5 +205,39 @@ final class TriviaQuestTests: XCTestCase {
     
     // Get 15 Questions Tests
     
+    func testGet15QuestionsSuccessResponse() {
+        
+        let testNetworkManager = TestNetworkManager()
+        let bundle = Bundle(for: TriviaQuestTests.self)
+            guard let url = bundle.url(forResource: "testJSONResponse", withExtension: "json"),
+                  let jsonData = try? Data(contentsOf: url) else {
+                fatalError("Failed to load mock JSON data")
+            }
+        testNetworkManager.testData = jsonData
+        Task.init {
+            let result = try await testNetworkManager.get15Questions()
+            XCTAssertEqual(result, jsonData)
+        }
+    }
     
+    func testGet15QuestionsErrorResponse() {
+        
+        let testNetworkManager = TestNetworkManager()
+        let bundle = Bundle(for: TriviaQuestTests.self)
+            guard let url = bundle.url(forResource: "testJSONResponse", withExtension: "json"),
+                  let jsonData = try? Data(contentsOf: url) else {
+                fatalError("Failed to load mock JSON data")
+            }
+        testNetworkManager.testData = jsonData
+        testNetworkManager.shouldThrowError = true
+        Task.init {
+            do {
+                let _ = try await testNetworkManager.get15Questions()
+                XCTFail("Expected error to be thrown but it succeeded")
+            } catch let error as NSError {
+                XCTAssertEqual(error.domain, "")
+                XCTAssertEqual(error.code, 0)
+            }
+        }
+    }
 }

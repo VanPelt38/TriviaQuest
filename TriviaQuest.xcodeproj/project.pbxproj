@@ -26,6 +26,7 @@
 		2329FB072BC1A80300AC5576 /* TriviaResultsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2329FB062BC1A80300AC5576 /* TriviaResultsModel.swift */; };
 		236A60A52BC2CA2F00DBE82A /* TestPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236A60A42BC2CA2F00DBE82A /* TestPersistence.swift */; };
 		236A60A72BC2F4FA00DBE82A /* testJSONResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 236A60A62BC2F4FA00DBE82A /* testJSONResponse.json */; };
+		236A60AA2BC33C8A00DBE82A /* TestNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236A60A92BC33C8A00DBE82A /* TestNetworkManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,7 @@
 		236A60A42BC2CA2F00DBE82A /* TestPersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestPersistence.swift; sourceTree = "<group>"; };
 		236A60A62BC2F4FA00DBE82A /* testJSONResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = testJSONResponse.json; sourceTree = "<group>"; };
 		236A60A82BC331B800DBE82A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		236A60A92BC33C8A00DBE82A /* TestNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestNetworkManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -209,6 +211,7 @@
 			isa = PBXGroup;
 			children = (
 				236A60A42BC2CA2F00DBE82A /* TestPersistence.swift */,
+				236A60A92BC33C8A00DBE82A /* TestNetworkManager.swift */,
 			);
 			path = "Test Dependencies";
 			sourceTree = "<group>";
@@ -347,6 +350,7 @@
 				2329FAC92BC1879D00AC5576 /* Persistence.swift in Sources */,
 				2329FB012BC19F0F00AC5576 /* PersistenceModule.swift in Sources */,
 				2329FAF82BC18CBD00AC5576 /* QuestionViewModel.swift in Sources */,
+				236A60AA2BC33C8A00DBE82A /* TestNetworkManager.swift in Sources */,
 				2329FAF32BC18C8600AC5576 /* AllQuestionsViewModel.swift in Sources */,
 				2329FAFB2BC18D0500AC5576 /* WelcomeView.swift in Sources */,
 				2329FACC2BC1879D00AC5576 /* TriviaQuest.xcdatamodeld in Sources */,
