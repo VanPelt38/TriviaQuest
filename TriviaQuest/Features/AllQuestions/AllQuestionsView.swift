@@ -44,6 +44,9 @@ struct AllQuestionsView: View {
                         await viewModel.load15Questions(networkManager: NetworkManager(session: URLSession.shared))
                     }
                 }
+                .alert("There was an error loading the questions. Please check your network connection and restart the app.", isPresented: $viewModel.networkErrorAlert) {
+                    Button("OK", role: .cancel) {}
+                }
             }
             .searchable(text: $searchText)
             .navigationTitle("Today's Questions")

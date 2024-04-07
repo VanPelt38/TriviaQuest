@@ -10,21 +10,28 @@ import CoreData
 
 class AllQuestionsViewModel: ObservableObject {
     
-    let context = PersistenceController.shared.managedObjectContext
     @Published var questions: [Question] = []
+    @Published var networkErrorAlert = false
 
     func load15Questions(networkManager: NetworkManagerModule) async {
         Task.init {
-            self.getLoadedQuestions()
+            self.getLoadedQuestions(coreDataService: PersistenceController.shared)
             if questions.isEmpty {
-                let questionResponse = try await networkManager.get15Questions()
-                self.persistQuestions(questionData: questionResponse)
-                self.getLoadedQuestions()
+                do {
+                    let questionResponse = try await networkManager.get15Questions()
+                    self.persistQuestions(questionData: questionResponse, coreDataService: PersistenceController.shared)
+                    self.getLoadedQuestions(coreDataService: PersistenceController.shared)
+                } catch {
+                    print("error loading questions: \(error)")
+                    DispatchQueue.main.async {
+                        self.networkErrorAlert = true
+                    }
+                }
             }
         }
     }
     
-    func persistQuestions(questionData: Data?) {
+    func persistQuestions(questionData: Data?, coreDataService: PersistenceModule) {
         
         if let data = questionData {
             do {
@@ -34,7 +41,7 @@ class AllQuestionsViewModel: ObservableObject {
                 
                 for question in result.results {
                     
-                    let newQuestion = Question(context: context)
+                    let newQuestion = Question(context: coreDataService.managedObjectContext)
                     newQuestion.number = Int16(questionID)
                     questionID += 1
                     newQuestion.category = question.category
@@ -43,7 +50,7 @@ class AllQuestionsViewModel: ObservableObject {
                     newQuestion.type = question.type
                     if question.type == "multiple" {
                     
-                    let correctAnswer = Answer(context: context)
+                    let correctAnswer = Answer(context: coreDataService.managedObjectContext)
                         correctAnswer.answer2Question = newQuestion
                         correctAnswer.correct = true
                         correctAnswer.number = 1
@@ -52,7 +59,7 @@ class AllQuestionsViewModel: ObservableObject {
                         var incorrectAnswerNo = 2
                         
                         for answer in question.incorrect_answers {
-                            let incorrectAnswer = Answer(context: context)
+                            let incorrectAnswer = Answer(context: coreDataService.managedObjectContext)
                             incorrectAnswer.answer2Question = newQuestion
                             incorrectAnswer.correct = false
                             incorrectAnswer.number = Int16(incorrectAnswerNo)
@@ -61,11 +68,11 @@ class AllQuestionsViewModel: ObservableObject {
                         }
                     } else {
                         
-                        let rightAnswer = Answer(context: context)
+                        let rightAnswer = Answer(context: coreDataService.managedObjectContext)
                         rightAnswer.answer2Question = newQuestion
                         rightAnswer.correct = question.correct_answer == "True" ? true : false
                         rightAnswer.number = 1
-                        let wrongAnswer = Answer(context: context)
+                        let wrongAnswer = Answer(context: coreDataService.managedObjectContext)
                         wrongAnswer.answer2Question = newQuestion
                         wrongAnswer.correct = !rightAnswer.correct
                         wrongAnswer.number = 2
@@ -88,14 +95,14 @@ class AllQuestionsViewModel: ObservableObject {
         }
     }
     
-    func getLoadedQuestions() {
+    func getLoadedQuestions(coreDataService: PersistenceModule) {
             
             questions = []
             let request: NSFetchRequest<Question> = Question.fetchRequest()
             let sortDescriptor = NSSortDescriptor(key: "number", ascending: true)
             request.sortDescriptors = [sortDescriptor]
             do {
-                questions = try context.fetch(request)
+                questions = try coreDataService.managedObjectContext.fetch(request)
                 print("questions loaded: \(questions.count)")
             } catch {
                 print("error loading issues from CD: \(error)")
