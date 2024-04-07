@@ -30,11 +30,12 @@ struct AllQuestionsView: View {
             List {
                 ForEach(0..<filteredQuestions.count, id: \.self) { question in
                     
-                    NavigationLink(destination: QuestionView(number: Int(viewModel.questions[question].number) )) {
-                        QuestionRow(text: viewModel.questions[question].text ?? "no question", category: "Category: \(viewModel.questions[question].category ?? "no category")", difficulty: "Difficulty: \( viewModel.questions[question].difficulty ?? "no difficulty")", answeredCorrectly: viewModel.questions[question].answeredCorrect, answeredIncorrectly: viewModel.questions[question].answeredWrong)
-                    }
+                    NavigationLink(destination: QuestionView(number: Int(filteredQuestions[question].number) )) {
+                        QuestionRow(text: filteredQuestions[question].text ?? "no question", category: "Category: \(filteredQuestions[question].category ?? "no category")", difficulty: "Difficulty: \( filteredQuestions[question].difficulty ?? "no difficulty")", answeredCorrectly: filteredQuestions[question].answeredCorrect, answeredIncorrectly: filteredQuestions[question].answeredWrong)
+                    }.listRowSeparator(.hidden)
                 }.listRowBackground(Color.clear)
-            }.background(.blue)
+            }
+            .background(.blue)
                 .task {
                     Task.init {
                         await viewModel.load15Questions(networkManager: NetworkManager(session: URLSession.shared))
@@ -43,10 +44,12 @@ struct AllQuestionsView: View {
                 .alert("There was an error loading the questions. Please check your network connection and restart the app.", isPresented: $viewModel.networkErrorAlert) {
                     Button("OK", role: .cancel) {}
                 }
-            }
+            }.background(            Rectangle()
+                .fill(Color.blue)
+                .edgesIgnoringSafeArea(.all))
             .searchable(text: $searchText)
             .navigationTitle("Today's Questions")
-        }
+        }.background(Color.blue)
     }
 }
 
@@ -86,6 +89,6 @@ struct QuestionRow: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        AllQuestionsView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        AllQuestionsView()
     }
 }

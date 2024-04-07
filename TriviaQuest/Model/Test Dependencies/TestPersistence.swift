@@ -30,20 +30,5 @@ class TestPersistence: PersistenceModule {
         }
         return container.viewContext
     }()
-    
-//    func saveContext () {
-//        let context = self.managedObjectContext
-//        if context.hasChanges {
-//            do {
-//                try context.save()
-//            } catch {
-//
-//                let nserror = error as NSError
-//                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-//            }
-//
-//        }
-//    }
-
 }
 
