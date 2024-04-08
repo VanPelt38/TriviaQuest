@@ -12,21 +12,32 @@ class AllQuestionsViewModel: ObservableObject {
     
     @Published var questions: [Question] = []
     @Published var networkErrorAlert = false
+    @Published var isLoading = false
     
     func load15Questions(networkManager: NetworkManagerModule, coreDataService: PersistenceModule) async {
-        
+       
+        DispatchQueue.main.async {
+            self.isLoading = true
+        }
         getLoadedQuestions(coreDataService: coreDataService) { [self] in
             Task.init {
                 if questions.isEmpty {
                     do {
                         let questionResponse = try await networkManager.get15Questions()
                         self.persistQuestions(questionData: questionResponse, coreDataService: coreDataService)
-                        self.getLoadedQuestions(coreDataService: coreDataService) {}
+                        self.getLoadedQuestions(coreDataService: coreDataService) {
+                            self.isLoading = false
+                        }
                     } catch {
                         print("error loading questions: \(error)")
                         DispatchQueue.main.async {
+                            self.isLoading = false
                             self.networkErrorAlert = true
                         }
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        self.isLoading = false
                     }
                 }
             }
@@ -84,12 +95,14 @@ class AllQuestionsViewModel: ObservableObject {
             } catch {
                 print("failure decoding json: \(error)")
                 DispatchQueue.main.async {
+                    self.isLoading = false
                     self.networkErrorAlert = true
                 }
             }
         } else {
             print("nil data returned from api")
             DispatchQueue.main.async {
+                self.isLoading = false
                 self.networkErrorAlert = true
             }
         }

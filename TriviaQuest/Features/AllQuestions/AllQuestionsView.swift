@@ -56,8 +56,11 @@ struct AllQuestionsView: View {
                 .alert("There was an error loading the questions. Please check your network connection and restart the app.", isPresented: $viewModel.networkErrorAlert) {
                     Button("OK", role: .cancel) {}
                 }
+                if viewModel.isLoading {
+                    ProgressView("Loading questions...").progressViewStyle(.circular)
+                }
             }.searchable(text: $searchText).font(Font.custom("Permanent Marker Regular", size: 20))
-                .navigationTitle("Questions")
+                .navigationTitle("Welcome, Quizzer")
         }
     }
     

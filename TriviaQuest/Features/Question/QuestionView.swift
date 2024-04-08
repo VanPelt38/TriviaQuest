@@ -18,7 +18,7 @@ struct QuestionView: View {
         ZStack {
             VStack {
                 if !viewModel.question.isEmpty {
-                    Text(viewModel.question[0].text ?? "no question").padding(EdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20)).font(Font.custom("Permanent Marker Regular", size: 25))
+                    Text(viewModel.question[0].text ?? "no question").padding(EdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20)).font(Font.custom("Permanent Marker Regular", size: 25)).minimumScaleFactor(0.5)
                     Text("Category: \(viewModel.question[0].category ?? "no category")").font(Font.custom("Permanent Marker Regular", size: 15)).foregroundColor(.blue)
                     Text("Difficulty: \(viewModel.question[0].difficulty ?? "no difficulty")").font(Font.custom("Permanent Marker Regular", size: 15))
 .foregroundColor(.red)
@@ -138,7 +138,7 @@ struct QuestionView: View {
                     }
                     Spacer()
                     if let answer = answerChosen {
-                        setAnswerMessage(answer).font(Font.custom("Permanent Marker Regular", size: 40))
+                        setAnswerMessage(answer).font(Font.custom("Permanent Marker Regular", size: 40)).minimumScaleFactor(0.5)
                     }
                     Spacer()
                 }
