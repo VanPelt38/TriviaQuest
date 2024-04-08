@@ -30,6 +30,7 @@
 		23CD2BCA2BC482B600ADB84E /* WelcomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23CD2BC92BC482B600ADB84E /* WelcomeViewModel.swift */; };
 		23CD2BCD2BC4868300ADB84E /* HowItWorksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23CD2BCC2BC4868300ADB84E /* HowItWorksView.swift */; };
 		23CD2BCF2BC489F700ADB84E /* PermanentMarker-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 23CD2BCE2BC489F700ADB84E /* PermanentMarker-Regular.ttf */; };
+		23CD2BD22BC4A1B000ADB84E /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 236A60A82BC331B800DBE82A /* Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -339,6 +340,7 @@
 			files = (
 				23CD2BCF2BC489F700ADB84E /* PermanentMarker-Regular.ttf in Resources */,
 				2329FAC42BC1879D00AC5576 /* Assets.xcassets in Resources */,
+				23CD2BD22BC4A1B000ADB84E /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
