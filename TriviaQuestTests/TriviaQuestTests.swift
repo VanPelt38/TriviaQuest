@@ -53,6 +53,20 @@ final class TriviaQuestTests: XCTestCase {
         XCTAssertTrue(allQuestionsView.searchFilter(with: question, and: ""))
     }
     
+    func testSearchFilterReturnsCorrectlyWithText() {
+        
+        let allQuestionsView = AllQuestionsView()
+        let testPersistence = TestPersistence.shared
+        let question = Question(context: testPersistence.managedObjectContext)
+        question.text = "This question has text"
+        do {
+            try testPersistence.managedObjectContext.save()
+        } catch {
+            print("failed to save entities: \(error)")
+        }
+        XCTAssertTrue(allQuestionsView.searchFilter(with: question, and: "question"))
+    }
+    
     // Load 15 Questions Tests
     
     func testLoad15QuestionsLoadsOnFirstLaunch() {

@@ -22,30 +22,15 @@ struct AllQuestionsView: View {
         case .easy:
             let easyQuestions = viewModel.questions.filter { $0.difficulty == "easy" }
             return easyQuestions.filter { question in
-                if searchText == "" {
-                    return question.text != ""
-                } else {
-                    return question.text?.lowercased().contains(searchText.lowercased()) ?? false
-                }
-            }
+                searchFilter(with: question, and: searchText)            }
         case .medium:
             let mediumQuestions = viewModel.questions.filter { $0.difficulty == "medium" }
             return mediumQuestions.filter { question in
-                if searchText == "" {
-                    return question.text != ""
-                } else {
-                    return question.text?.lowercased().contains(searchText.lowercased()) ?? false
-                }
-            }
+                searchFilter(with: question, and: searchText)            }
         case .hard:
             let hardQuestions = viewModel.questions.filter { $0.difficulty == "hard" }
             return hardQuestions.filter { question in
-                if searchText == "" {
-                    return question.text != ""
-                } else {
-                    return question.text?.lowercased().contains(searchText.lowercased()) ?? false
-                }
-            }
+                searchFilter(with: question, and: searchText)            }
         }
     }
     
