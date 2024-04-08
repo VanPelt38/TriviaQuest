@@ -39,21 +39,23 @@ struct WelcomeView: View {
                     Text("Refresh Questions").padding(EdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10))
                         .font(Font.custom("New", size: 20))
                         .foregroundColor(.white).background(
-                            RoundedRectangle(cornerRadius: 10).foregroundColor(.blue)).padding(EdgeInsets(top: 0, leading: 0, bottom: 100, trailing: 0))
+                            RoundedRectangle(cornerRadius: 10).foregroundColor(.blue)).padding(EdgeInsets(top: 0, leading: 0, bottom: 10, trailing: 0))
                 }
                 .alert("Are you sure? Your current questions and answers will be deleted.", isPresented: $areYouSure) {
                     Button("New Questions please", role: nil) {
-                        
+                        viewModel.deleteQuestions(coreDataService: PersistenceController.shared)
                     }
                     Button("Actually, no", role: .cancel) {}
                 }
-
-//                }
-//                NavigationLink(destination: HowItWorksView()) {
-//                    Text("How it Works").padding(EdgeInsets(top: 0, leading: 0, bottom: 100, trailing: 0))
-//                        .font(Font.custom("New", size: 20))
-//
-//                }
+                NavigationLink(destination: HowItWorksView()) {
+                    Text("How it Works")
+                        .padding(EdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10))
+                        .font(Font.custom("New", size: 20))
+                        .foregroundColor(.white)
+                }.background(
+                    RoundedRectangle(cornerRadius: 10)
+                        .fill(.purple)
+                ).padding(EdgeInsets(top: 0, leading: 0, bottom: 100, trailing: 0))
             }.foregroundColor(.black)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(

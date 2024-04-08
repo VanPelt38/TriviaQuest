@@ -28,6 +28,7 @@
 		236A60A72BC2F4FA00DBE82A /* testJSONResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 236A60A62BC2F4FA00DBE82A /* testJSONResponse.json */; };
 		236A60AA2BC33C8A00DBE82A /* TestNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236A60A92BC33C8A00DBE82A /* TestNetworkManager.swift */; };
 		23CD2BCA2BC482B600ADB84E /* WelcomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23CD2BC92BC482B600ADB84E /* WelcomeViewModel.swift */; };
+		23CD2BCD2BC4868300ADB84E /* HowItWorksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23CD2BCC2BC4868300ADB84E /* HowItWorksView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +74,7 @@
 		236A60A82BC331B800DBE82A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		236A60A92BC33C8A00DBE82A /* TestNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestNetworkManager.swift; sourceTree = "<group>"; };
 		23CD2BC92BC482B600ADB84E /* WelcomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewModel.swift; sourceTree = "<group>"; };
+		23CD2BCC2BC4868300ADB84E /* HowItWorksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowItWorksView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,6 +172,7 @@
 				2329FAF92BC18CCA00AC5576 /* Welcome */,
 				2329FAF12BC18C6900AC5576 /* AllQuestions */,
 				2329FAF42BC18C8E00AC5576 /* Question */,
+				23CD2BCB2BC4865700ADB84E /* HowItWorks */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -217,6 +220,14 @@
 				236A60A92BC33C8A00DBE82A /* TestNetworkManager.swift */,
 			);
 			path = "Test Dependencies";
+			sourceTree = "<group>";
+		};
+		23CD2BCB2BC4865700ADB84E /* HowItWorks */ = {
+			isa = PBXGroup;
+			children = (
+				23CD2BCC2BC4868300ADB84E /* HowItWorksView.swift */,
+			);
+			path = HowItWorks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -357,6 +368,7 @@
 				2329FAF32BC18C8600AC5576 /* AllQuestionsViewModel.swift in Sources */,
 				2329FAFB2BC18D0500AC5576 /* WelcomeView.swift in Sources */,
 				2329FACC2BC1879D00AC5576 /* TriviaQuest.xcdatamodeld in Sources */,
+				23CD2BCD2BC4868300ADB84E /* HowItWorksView.swift in Sources */,
 				236A60A52BC2CA2F00DBE82A /* TestPersistence.swift in Sources */,
 				23CD2BCA2BC482B600ADB84E /* WelcomeViewModel.swift in Sources */,
 				2329FAC22BC1879C00AC5576 /* AllQuestionsView.swift in Sources */,
