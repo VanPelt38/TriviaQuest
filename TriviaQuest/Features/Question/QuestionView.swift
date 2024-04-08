@@ -18,7 +18,7 @@ struct QuestionView: View {
         ZStack {
             VStack {
                 if !viewModel.question.isEmpty {
-                    Text(viewModel.question[0].text ?? "no question").padding(EdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20)).font(Font.custom("Permanent Marker Regular", size: 25)).minimumScaleFactor(0.5)
+                    Text(viewModel.question[0].text ?? "no question").padding(EdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20)).font(Font.custom("Permanent Marker Regular", size: 25)).minimumScaleFactor(0.5).multilineTextAlignment(.center)
                     Text("Category: \(viewModel.question[0].category ?? "no category")").font(Font.custom("Permanent Marker Regular", size: 15)).foregroundColor(.blue)
                     Text("Difficulty: \(viewModel.question[0].difficulty ?? "no difficulty")").font(Font.custom("Permanent Marker Regular", size: 15))
 .foregroundColor(.red)
@@ -143,7 +143,7 @@ struct QuestionView: View {
                     Spacer()
                 }
             }.background(
-                RoundedRectangle(cornerRadius: 10).fill(.white).padding(EdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5))
+                RoundedRectangle(cornerRadius: 10).fill(.white).padding(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10))
             )
             .task {
                 viewModel.getQuestion(number, coreDataService: PersistenceController.shared)

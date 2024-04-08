@@ -20,7 +20,7 @@ class WelcomeViewModel: ObservableObject {
             }
             try coreDataService.managedObjectContext.save()
         } catch {
-            fatalError("Error deleting question objects")
+            print("Error deleting question objects: \(error)")
         }
     }
 }

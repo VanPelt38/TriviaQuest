@@ -16,10 +16,10 @@ class NetworkManager: NetworkManagerModule {
     }
     
     func get15Questions() async throws -> Data? {
-
+        
         guard let triviaURL = URL(string: "https://opentdb.com/api.php?amount=15") else { throw URLError(.badURL) }
         let (data, _) = try await session.data(for: URLRequest(url: triviaURL))
         
-           return data
-        }
+        return data
+    }
 }

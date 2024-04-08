@@ -32,7 +32,6 @@ struct WelcomeView: View {
                     RoundedRectangle(cornerRadius: 10)
                         .fill(.red)
                 ).padding(EdgeInsets(top: 0, leading: 0, bottom: 10, trailing: 0))
-                
                 Button(action: {
                     areYouSure = true
                 }){
@@ -60,12 +59,11 @@ struct WelcomeView: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(
                     Image("subtle-prism")
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .edgesIgnoringSafeArea(.all)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .edgesIgnoringSafeArea(.all)
                 )
         }
-        
     }
 }
 

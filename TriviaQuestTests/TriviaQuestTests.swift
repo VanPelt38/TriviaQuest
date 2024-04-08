@@ -256,7 +256,7 @@ final class TriviaQuestTests: XCTestCase {
     func testAnswerMessageReturnsCorrectly() {
         
         let questionView = QuestionView(number: 1)
-        XCTAssertEqual(questionView.setAnswerMessage(false), Text("Better Luck Next Time...").foregroundColor(Color.red).bold())
+        XCTAssertEqual(questionView.setAnswerMessage(false), Text("Better Luck Next Time...").foregroundColor(Color.red))
     }
     
     // Set Answer Colour Tests

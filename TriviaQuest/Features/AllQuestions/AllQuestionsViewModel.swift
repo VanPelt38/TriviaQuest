@@ -15,7 +15,7 @@ class AllQuestionsViewModel: ObservableObject {
     @Published var isLoading = false
     
     func load15Questions(networkManager: NetworkManagerModule, coreDataService: PersistenceModule) async {
-       
+        
         DispatchQueue.main.async {
             self.isLoading = true
         }
