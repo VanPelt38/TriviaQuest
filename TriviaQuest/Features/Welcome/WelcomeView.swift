@@ -9,6 +9,7 @@ import SwiftUI
 
 struct WelcomeView: View {
     
+    @StateObject private var viewModel = WelcomeViewModel()
     @State private var areYouSure = false
     
     var body: some View {

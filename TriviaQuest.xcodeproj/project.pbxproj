@@ -27,6 +27,7 @@
 		236A60A52BC2CA2F00DBE82A /* TestPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236A60A42BC2CA2F00DBE82A /* TestPersistence.swift */; };
 		236A60A72BC2F4FA00DBE82A /* testJSONResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 236A60A62BC2F4FA00DBE82A /* testJSONResponse.json */; };
 		236A60AA2BC33C8A00DBE82A /* TestNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236A60A92BC33C8A00DBE82A /* TestNetworkManager.swift */; };
+		23CD2BCA2BC482B600ADB84E /* WelcomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23CD2BC92BC482B600ADB84E /* WelcomeViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,7 @@
 		236A60A62BC2F4FA00DBE82A /* testJSONResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = testJSONResponse.json; sourceTree = "<group>"; };
 		236A60A82BC331B800DBE82A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		236A60A92BC33C8A00DBE82A /* TestNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestNetworkManager.swift; sourceTree = "<group>"; };
+		23CD2BC92BC482B600ADB84E /* WelcomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -203,6 +205,7 @@
 			isa = PBXGroup;
 			children = (
 				2329FAFA2BC18D0500AC5576 /* WelcomeView.swift */,
+				23CD2BC92BC482B600ADB84E /* WelcomeViewModel.swift */,
 			);
 			path = Welcome;
 			sourceTree = "<group>";
@@ -355,6 +358,7 @@
 				2329FAFB2BC18D0500AC5576 /* WelcomeView.swift in Sources */,
 				2329FACC2BC1879D00AC5576 /* TriviaQuest.xcdatamodeld in Sources */,
 				236A60A52BC2CA2F00DBE82A /* TestPersistence.swift in Sources */,
+				23CD2BCA2BC482B600ADB84E /* WelcomeViewModel.swift in Sources */,
 				2329FAC22BC1879C00AC5576 /* AllQuestionsView.swift in Sources */,
 				2329FAF62BC18CAE00AC5576 /* QuestionView.swift in Sources */,
 				2329FB032BC1A5A000AC5576 /* QuestionModel.swift in Sources */,
