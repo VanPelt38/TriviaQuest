@@ -12,20 +12,55 @@ struct AllQuestionsView: View {
     
     @StateObject private var viewModel = AllQuestionsViewModel()
     @State private var searchText = ""
+    @State private var selectedDifficulty: DifficultyFilter = .all
     var filteredQuestions: [Question] {
-        viewModel.questions.filter { question in
-            if searchText == "" {
-                return question.text != ""
-            } else {
-                return question.text?.lowercased().contains(searchText.lowercased()) ?? false
+        switch selectedDifficulty {
+        case .all:
+            return viewModel.questions.filter { question in
+                if searchText == "" {
+                    return question.text != ""
+                } else {
+                    return question.text?.lowercased().contains(searchText.lowercased()) ?? false
+                }
+            }
+        case .easy:
+            let easyQuestions = viewModel.questions.filter { $0.difficulty == "easy" }
+            return easyQuestions.filter { question in
+                if searchText == "" {
+                    return question.text != ""
+                } else {
+                    return question.text?.lowercased().contains(searchText.lowercased()) ?? false
+                }
+            }
+        case .medium:
+            let mediumQuestions = viewModel.questions.filter { $0.difficulty == "medium" }
+            return mediumQuestions.filter { question in
+                if searchText == "" {
+                    return question.text != ""
+                } else {
+                    return question.text?.lowercased().contains(searchText.lowercased()) ?? false
+                }
+            }
+        case .hard:
+            let hardQuestions = viewModel.questions.filter { $0.difficulty == "hard" }
+            return hardQuestions.filter { question in
+                if searchText == "" {
+                    return question.text != ""
+                } else {
+                    return question.text?.lowercased().contains(searchText.lowercased()) ?? false
+                }
             }
         }
-        
     }
     
     var body: some View {
         NavigationView {
             VStack {
+                Picker("Select Difficulty", selection: $selectedDifficulty) {
+                    ForEach(DifficultyFilter.allCases, id: \.self) { difficulty in
+                        Text(difficulty.rawValue)
+                    }
+                }.pickerStyle(.segmented).padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
                 List {
                     ForEach(0..<filteredQuestions.count, id: \.self) { question in
                         
@@ -44,6 +79,14 @@ struct AllQuestionsView: View {
             }.searchable(text: $searchText)
                 .navigationTitle("Today's Questions")
         }
+    }
+    
+    enum DifficultyFilter: String, CaseIterable {
+        
+        case all = "All"
+        case easy = "Easy"
+        case medium = "Medium"
+        case hard = "Hard"
     }
 }
 
