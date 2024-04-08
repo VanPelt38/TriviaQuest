@@ -17,7 +17,7 @@ struct AllQuestionsView: View {
         switch selectedDifficulty {
         case .all:
             return viewModel.questions.filter { question in
-                
+                searchFilter(with: question, and: searchText)
             }
         case .easy:
             let easyQuestions = viewModel.questions.filter { $0.difficulty == "easy" }
