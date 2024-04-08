@@ -32,6 +32,34 @@ final class TriviaQuestTests: XCTestCase {
         } catch {
             fatalError("Error deleting question objects")
         }
+        
+    }
+    
+    
+    //MARK: - Welcome View Tests
+    
+    // Delete All Questions Tests
+    
+    func testDeleteQuestionsDeletesSuccessfully() {
+        
+        var results: [Question] = []
+        let welcomeVM = WelcomeViewModel()
+        let testPersistence = TestPersistence.shared
+        let question = Question(context: testPersistence.managedObjectContext)
+        question.text = "This question has text"
+        do {
+            try testPersistence.managedObjectContext.save()
+        } catch {
+            print("failed to save entities: \(error)")
+        }
+        welcomeVM.deleteQuestions(coreDataService: testPersistence)
+        let request: NSFetchRequest<Question> = Question.fetchRequest()
+        do {
+            results = try testPersistence.managedObjectContext.fetch(request)
+        } catch {
+            print("error retrieving entities from CD: \(error)")
+        }
+        XCTAssertTrue(results.isEmpty)
     }
     
 
