@@ -39,8 +39,7 @@ struct AllQuestionsView: View {
             VStack {
                 Picker("Select Difficulty", selection: $selectedDifficulty) {
                     ForEach(DifficultyFilter.allCases, id: \.self) { difficulty in
-                        Text(difficulty.rawValue)
-                    }
+                        Text(difficulty.rawValue)                    }
                 }.pickerStyle(.segmented).padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
                 List {
                     ForEach(0..<filteredQuestions.count, id: \.self) { question in
@@ -57,8 +56,8 @@ struct AllQuestionsView: View {
                 .alert("There was an error loading the questions. Please check your network connection and restart the app.", isPresented: $viewModel.networkErrorAlert) {
                     Button("OK", role: .cancel) {}
                 }
-            }.searchable(text: $searchText)
-                .navigationTitle("Today's Questions")
+            }.searchable(text: $searchText).font(Font.custom("Permanent Marker Regular", size: 20))
+                .navigationTitle("Questions")
         }
     }
     
@@ -91,11 +90,11 @@ struct QuestionRow: View {
         VStack {
             Text(text)
                 .foregroundColor(.black)
-                .fontWeight(.bold)
+                .font(Font.custom("Permanent Marker Regular", size: 20))
                 .multilineTextAlignment(.center)
             HStack {
-                Text(category).foregroundColor(.blue).font(.footnote).italic()
-                Text(difficulty).foregroundColor(.red).font(.footnote).italic()
+                Text(category).foregroundColor(.blue).font(Font.custom("Permanent Marker Regular", size: 10))
+                Text(difficulty).foregroundColor(.red).font(Font.custom("Permanent Marker Regular", size: 10))
                 if answeredCorrectly {
                     Image("green-tick")
                         .resizable()

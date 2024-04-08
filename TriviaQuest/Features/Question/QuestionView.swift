@@ -18,9 +18,10 @@ struct QuestionView: View {
         ZStack {
             VStack {
                 if !viewModel.question.isEmpty {
-                    Text(viewModel.question[0].text ?? "no question").fontWeight(.bold).padding(EdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20)).font(Font.custom("New", size: 30))
-                    Text("Category: \(viewModel.question[0].category ?? "no category")").font(.footnote).italic().foregroundColor(.blue)
-                    Text("Difficulty: \(viewModel.question[0].difficulty ?? "no difficulty")").font(.footnote).italic().foregroundColor(.red)
+                    Text(viewModel.question[0].text ?? "no question").padding(EdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20)).font(Font.custom("Permanent Marker Regular", size: 25))
+                    Text("Category: \(viewModel.question[0].category ?? "no category")").font(Font.custom("Permanent Marker Regular", size: 15)).foregroundColor(.blue)
+                    Text("Difficulty: \(viewModel.question[0].difficulty ?? "no difficulty")").font(Font.custom("Permanent Marker Regular", size: 15))
+.foregroundColor(.red)
                     Spacer()
                     if !viewModel.answers.isEmpty && viewModel.answers.count > 2 {
                         ForEach (0..<viewModel.answers.count, id: \.self) { a in
@@ -38,16 +39,16 @@ struct QuestionView: View {
                                 viewModel.saveData(coreDataService: PersistenceController.shared)
                             }) {
                                 HStack {
-                                    Text(viewModel.answers[a].text ?? "no answer text").foregroundColor(.white).padding(EdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10))
+                                    Text(viewModel.answers[a].text ?? "no answer text").foregroundColor(.white).padding(EdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)).font(Font.custom("Permanent Marker Regular", size: 20))
                                     if answerChosen != nil {
                                         if viewModel.answers[a].correct {
                                             Image("green-tick")
                                                 .resizable()
-                                                .frame(width: 20, height: 20)
+                                                .frame(width: 20, height: 20).padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 5))
                                         } else if viewModel.answers[a].number == viewModel.question[0].incorrectAnswerChosen {
                                             Image("red-cross")
                                                 .resizable()
-                                                .frame(width: 20, height: 20)
+                                                .frame(width: 20, height: 20).padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 5))
                                         }
                                     }
                                 }
@@ -74,18 +75,18 @@ struct QuestionView: View {
                             }
                         }) {
                             HStack{
-                                Text("true").foregroundColor(.white).padding(EdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10))
+                                Text("true").foregroundColor(.white).padding(EdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)).font(Font.custom("Permanent Marker Regular", size: 20))
                                 if answerChosen != nil {
                                     ForEach (0..<viewModel.answers.count, id: \.self) { answer in
                                         if viewModel.answers[answer].number == 1 {
                                             if viewModel.answers[answer].correct {
                                                 Image("green-tick")
                                                     .resizable()
-                                                    .frame(width: 20, height: 20)
+                                                    .frame(width: 20, height: 20).padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 5))
                                             } else {
                                                 Image("red-cross")
                                                     .resizable()
-                                                    .frame(width: 20, height: 20)
+                                                    .frame(width: 20, height: 20).padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 5))
                                             }
                                         }
                                         
@@ -113,18 +114,18 @@ struct QuestionView: View {
                             }
                         }) {
                             HStack{
-                                Text("false").foregroundColor(.white).padding(EdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10))
+                                Text("false").foregroundColor(.white).padding(EdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)).font(Font.custom("Permanent Marker Regular", size: 20))
                                 if answerChosen != nil {
                                     ForEach (0..<viewModel.answers.count, id: \.self) { answer in
                                         if viewModel.answers[answer].number == 1 {
                                             if viewModel.answers[answer].correct {
                                                 Image("red-cross")
                                                     .resizable()
-                                                    .frame(width: 20, height: 20)
+                                                    .frame(width: 20, height: 20).padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 5))
                                             } else {
                                                 Image("green-tick")
                                                     .resizable()
-                                                    .frame(width: 20, height: 20)
+                                                    .frame(width: 20, height: 20).padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 5))
                                             }
                                         }
                                     }
@@ -137,7 +138,7 @@ struct QuestionView: View {
                     }
                     Spacer()
                     if let answer = answerChosen {
-                        setAnswerMessage(answer)
+                        setAnswerMessage(answer).font(Font.custom("Permanent Marker Regular", size: 40))
                     }
                     Spacer()
                 }
@@ -163,7 +164,7 @@ struct QuestionView: View {
     }
     
     func setAnswerMessage(_ answer: Bool) -> Text {
-        return answer ? Text("Nice Going!").foregroundColor(Color.green).bold() : Text("Better Luck Next Time...").foregroundColor(Color.red).bold()
+        return answer ? Text("Nice Going!").foregroundColor(Color.green) : Text("Better Luck Next Time...").foregroundColor(Color.red)
     }
     
     func setAnswerColour(answerNo: Int) -> Color {

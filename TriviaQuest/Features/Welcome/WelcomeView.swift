@@ -21,12 +21,12 @@ struct WelcomeView: View {
                     Image("glasses").resizable()
                         .frame(width: 98, height: 98)
                 }.padding(EdgeInsets(top: 100, leading: 0, bottom: 0, trailing: 0))
-                Text("Trivia Quest").padding(EdgeInsets(top: 5, leading: 20, bottom: 30, trailing: 20)).font(Font.custom("New", size: 48))
+                Text("Trivia Quest").padding(EdgeInsets(top: 5, leading: 20, bottom: 30, trailing: 20)).font(Font.custom("Permanent Marker Regular", size: 48))
                 Spacer()
                 NavigationLink(destination: AllQuestionsView()) {
                     Text("Let's Play!")
                         .padding(EdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10))
-                        .font(Font.custom("New", size: 20))
+                        .font(Font.custom("Permanent Marker Regular", size: 20))
                         .foregroundColor(.white)
                 }.background(
                     RoundedRectangle(cornerRadius: 10)
@@ -37,7 +37,7 @@ struct WelcomeView: View {
                     areYouSure = true
                 }){
                     Text("Refresh Questions").padding(EdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10))
-                        .font(Font.custom("New", size: 20))
+                        .font(Font.custom("Permanent Marker Regular", size: 20))
                         .foregroundColor(.white).background(
                             RoundedRectangle(cornerRadius: 10).foregroundColor(.blue)).padding(EdgeInsets(top: 0, leading: 0, bottom: 10, trailing: 0))
                 }
@@ -50,7 +50,7 @@ struct WelcomeView: View {
                 NavigationLink(destination: HowItWorksView()) {
                     Text("How it Works")
                         .padding(EdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10))
-                        .font(Font.custom("New", size: 20))
+                        .font(Font.custom("Permanent Marker Regular", size: 20))
                         .foregroundColor(.white)
                 }.background(
                     RoundedRectangle(cornerRadius: 10)
