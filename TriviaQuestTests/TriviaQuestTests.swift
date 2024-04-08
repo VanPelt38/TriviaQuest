@@ -37,6 +37,16 @@ final class TriviaQuestTests: XCTestCase {
 
     //MARK: - All Questions View Tests
     
+    // Filter Difficulty Tests
+    
+    func testSearchFilterReturnsCorrectlyWithoutText() {
+        
+        let allQuestionsView = AllQuestionsView()
+        let question = Question()
+        question.text = "This question has text"
+        XCTAssertTrue(allQuestionsView.searchFilter(with: question, and: ""))
+    }
+    
     // Load 15 Questions Tests
     
     func testLoad15QuestionsLoadsOnFirstLaunch() {

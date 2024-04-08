@@ -17,11 +17,7 @@ struct AllQuestionsView: View {
         switch selectedDifficulty {
         case .all:
             return viewModel.questions.filter { question in
-                if searchText == "" {
-                    return question.text != ""
-                } else {
-                    return question.text?.lowercased().contains(searchText.lowercased()) ?? false
-                }
+                
             }
         case .easy:
             let easyQuestions = viewModel.questions.filter { $0.difficulty == "easy" }
@@ -78,6 +74,15 @@ struct AllQuestionsView: View {
                 }
             }.searchable(text: $searchText)
                 .navigationTitle("Today's Questions")
+        }
+    }
+    
+    func searchFilter(with question: Question, and text: String) -> Bool {
+        
+        if text == "" {
+            return question.text != ""
+        } else {
+            return question.text?.lowercased().contains(text.lowercased()) ?? false
         }
     }
     
